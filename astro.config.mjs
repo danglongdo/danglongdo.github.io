@@ -1,9 +1,15 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
+import tailwind from '@astrojs/tailwind';
 
 /** @type {import('astro').AstroUserConfig} */
 const config = {
   output: 'static',
+  integrations: [
+    tailwind({
+      applyBaseStyles: false,
+    }),
+  ],
   i18n: {
     defaultLocale: 'en',
     locales: ['en', 'vi'],
