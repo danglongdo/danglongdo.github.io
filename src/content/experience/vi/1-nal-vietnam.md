@@ -1,7 +1,7 @@
 ---
 company: "NAL Vietnam"
 role: "Kỹ sư Full-Stack & Tự động hóa AI Doanh nghiệp"
-location: "Đà Nẵng, Việt Nam"
+location: "Hà Nội, Việt Nam"
 period: "2025 - Hiện tại"
 description: "Kiến trúc các luồng tác tử AI tự động hóa doanh nghiệp, trợ lý đối thoại nghiệp vụ trên nền tảng Mattermost và giải pháp ERP nội bộ với Refine, React và Supabase Edge Functions."
 skills:

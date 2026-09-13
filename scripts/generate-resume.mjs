@@ -65,7 +65,7 @@ const resumeData = {
   experience: [
     {
       company: 'NAL Vietnam',
-      location: 'Da Nang, Vietnam',
+      location: 'Hanoi, Vietnam',
       role: 'Full-Stack & Enterprise AI Automation Engineer',
       period: '2025 - Present',
       bullets: [

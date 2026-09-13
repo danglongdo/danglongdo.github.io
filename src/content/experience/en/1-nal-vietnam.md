@@ -1,7 +1,7 @@
 ---
 company: "NAL Vietnam"
 role: "Full-Stack & Enterprise AI Automation Engineer"
-location: "Da Nang, Vietnam"
+location: "Hanoi, Vietnam"
 period: "2025 - Present"
 description: "Architecting enterprise AI automation agent workflows, conversational business assistants on Mattermost, and internal ERP solutions with Refine, React, and Supabase Edge Functions."
 skills:
