@@ -8,6 +8,8 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "test": "bun test",
+    "test:unit": "bun test tests/unit",
     "test:e2e": "playwright test",
     "astro": "astro"
   },
