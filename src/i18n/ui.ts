@@ -39,13 +39,20 @@ export const ui = {
     'project.readCaseStudy': 'Read Case Study',
     'project.backToProjects': 'Back to Projects',
     'project.featured': 'Featured Project',
+    'project.role': 'Role',
     'project.techStack': 'Tech Stack',
     'project.architecture': 'Architecture & Key Decisions',
+    'project.keyDecision': 'Key Decision',
+    'project.problem': 'Problem',
+    'project.confidential': 'Enterprise NDA',
     'project.outcomes': 'Key Outcomes & Impact',
 
     // Contact banner
     'contact.openToWork': 'Available for Opportunities',
+    'contact.subtitle': 'Interested in collaborating or discussing technical challenges in .NET, distributed systems, or enterprise AI automation? Reach out directly.',
+    'contact.sendEmail': 'Send an Email',
     'contact.email': 'Email',
+    'contact.downloadCv': 'Download CV',
     'contact.github': 'GitHub',
     'contact.linkedin': 'LinkedIn',
 
@@ -57,6 +64,7 @@ export const ui = {
     // Footer
     'footer.rights': 'All rights reserved.',
     'footer.hostedOn': 'Deployed on Cloudflare Pages',
+    'footer.builtWith': 'Built with Astro & Tailwind CSS',
   },
   vi: {
     // Navigation
@@ -89,13 +97,20 @@ export const ui = {
     'project.readCaseStudy': 'Đọc bài phân tích',
     'project.backToProjects': 'Quay lại dự án',
     'project.featured': 'Dự án Tiêu biểu',
+    'project.role': 'Vai trò',
     'project.techStack': 'Công nghệ',
     'project.architecture': 'Kiến trúc & Quyết định cốt lõi',
+    'project.keyDecision': 'Quyết định cốt lõi',
+    'project.problem': 'Thách thức',
+    'project.confidential': 'Bảo mật NDA',
     'project.outcomes': 'Kết quả & Tác động',
 
     // Contact banner
     'contact.openToWork': 'Sẵn sàng cho cơ hội mới',
+    'contact.subtitle': 'Bạn quan tâm đến việc hợp tác hoặc trao đổi về kiến trúc .NET, hệ thống phân tán hay tự động hoá AI doanh nghiệp? Hãy liên hệ trực tiếp.',
+    'contact.sendEmail': 'Gửi Email Trực tiếp',
     'contact.email': 'Email',
+    'contact.downloadCv': 'Tải CV',
     'contact.github': 'GitHub',
     'contact.linkedin': 'LinkedIn',
 
@@ -107,6 +122,7 @@ export const ui = {
     // Footer
     'footer.rights': 'Bảo lưu mọi quyền.',
     'footer.hostedOn': 'Triển khai trên Cloudflare Pages',
+    'footer.builtWith': 'Xây dựng với Astro & Tailwind CSS',
   },
 } as const;
 
