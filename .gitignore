@@ -25,6 +25,7 @@ Thumbs.db
 # Test artifacts
 playwright-report/
 test-results/
+.playwright-mcp/
 
 # Wrangler / Cloudflare local state
 .wrangler/
