@@ -1,0 +1,55 @@
+---
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '../i18n/utils';
+import type { SupportedLanguage } from '../i18n/ui';
+
+export interface Props {
+  lang?: SupportedLanguage;
+  class?: string;
+}
+
+const { lang: propLang, class: className = '' } = Astro.props;
+const currentLang = propLang || getLangFromUrl(Astro.url);
+const t = useTranslations(currentLang);
+const translatePath = useTranslatedPath(currentLang);
+
+const fullCurrentPath = `${Astro.url.pathname}${Astro.url.search}`;
+const enUrl = translatePath(fullCurrentPath, 'en');
+const viUrl = translatePath(fullCurrentPath, 'vi');
+---
+
+<nav
+  aria-label={t('a11y.languageSwitcher')}
+  class:list={[
+    'inline-flex items-center p-1 rounded-lg bg-surface border border-border text-xs font-mono select-none',
+    className,
+  ]}
+>
+  <a
+    href={enUrl}
+    aria-current={currentLang === 'en' ? 'page' : undefined}
+    class:list={[
+      'inline-flex items-center justify-center px-3 py-1.5 min-w-[44px] min-h-[44px] sm:min-w-[36px] sm:min-h-[32px] rounded-md transition-all duration-150 focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none',
+      currentLang === 'en'
+        ? 'bg-ink text-canvas font-semibold shadow-xs'
+        : 'text-muted hover:text-ink hover:bg-canvas/80 font-medium',
+    ]}
+    aria-label="Switch to English"
+    data-lang-switch="en"
+  >
+    EN
+  </a>
+  <a
+    href={viUrl}
+    aria-current={currentLang === 'vi' ? 'page' : undefined}
+    class:list={[
+      'inline-flex items-center justify-center px-3 py-1.5 min-w-[44px] min-h-[44px] sm:min-w-[36px] sm:min-h-[32px] rounded-md transition-all duration-150 focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none',
+      currentLang === 'vi'
+        ? 'bg-ink text-canvas font-semibold shadow-xs'
+        : 'text-muted hover:text-ink hover:bg-canvas/80 font-medium',
+    ]}
+    aria-label="Chuyển sang Tiếng Việt"
+    data-lang-switch="vi"
+  >
+    VI
+  </a>
+</nav>

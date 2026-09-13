@@ -1,0 +1,354 @@
+---
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '../i18n/utils';
+import type { SupportedLanguage } from '../i18n/ui';
+import { siteConfig } from '../config/site';
+import LanguagePicker from './LanguagePicker.astro';
+
+export interface Props {
+  lang?: SupportedLanguage;
+  class?: string;
+}
+
+const { lang: propLang, class: className = '' } = Astro.props;
+const lang = propLang || getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+
+const homeUrl = translatePath('/');
+const isHomePage = Astro.url.pathname === '/' || Astro.url.pathname === '/vi' || Astro.url.pathname === '/vi/';
+const getSectionHref = (hash: string) => (isHomePage ? hash : `${homeUrl === '/' ? '' : homeUrl}${hash}`);
+
+const navItems = [
+  { href: getSectionHref('#projects'), label: t('nav.projects') },
+  { href: getSectionHref('#experience'), label: t('nav.experience') },
+  { href: getSectionHref('#capabilities'), label: t('nav.capabilities') },
+  { href: getSectionHref('#contact'), label: t('nav.contact') },
+];
+---
+
+<header
+  class:list={[
+    'sticky top-0 z-30 w-full border-b border-border/80 bg-canvas/90 backdrop-blur-md transition-colors',
+    className,
+  ]}
+>
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+    <!-- Brand Mark & Identity -->
+    <a
+      href={homeUrl}
+      class="group flex items-center gap-3 rounded-lg focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none select-none"
+      aria-label={`${siteConfig.name} - ${lang === 'vi' ? 'Trang chủ' : 'Home'}`}
+    >
+      <span
+        class="flex h-9 w-9 items-center justify-center rounded-lg bg-ink text-canvas font-mono text-sm font-bold tracking-wider group-hover:bg-accent group-hover:text-white transition-colors shadow-xs"
+      >
+        DL
+      </span>
+      <div class="flex flex-col">
+        <span class="text-sm font-bold tracking-tight text-ink group-hover:text-accent transition-colors leading-tight">
+          {siteConfig.name}
+        </span>
+        <span class="hidden sm:block text-[11px] font-mono text-muted tracking-tight leading-none mt-0.5">
+          {lang === 'vi' ? 'Kỹ sư .NET & AI Doanh nghiệp' : '.NET & Enterprise AI'}
+        </span>
+      </div>
+    </a>
+
+    <!-- Desktop Navigation & Controls -->
+    <div class="hidden md:flex items-center gap-6">
+      <nav aria-label="Main Navigation" class="flex items-center gap-1 lg:gap-2">
+        {
+          navItems.map((item) => (
+            <a
+              href={item.href}
+              class="px-3 py-1.5 rounded-md text-xs lg:text-sm font-medium text-muted hover:text-ink hover:bg-surface transition-colors focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none"
+            >
+              {item.label}
+            </a>
+          ))
+        }
+      </nav>
+
+      <div class="h-4 w-px bg-border/80" aria-hidden="true"></div>
+
+      <div class="flex items-center gap-3">
+        <a
+          href={siteConfig.links.resume}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border bg-surface text-xs font-mono font-medium text-ink hover:text-accent hover:border-accent hover:shadow-xs transition-all focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none select-none"
+          aria-label={`${t('nav.resume')} (PDF)`}
+        >
+          <span>{t('nav.resume')}</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            class="w-3.5 h-3.5 text-muted group-hover:text-accent transition-colors"
+            aria-hidden="true"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M10 3a.75.75 0 0 1 .75.75v10.638l3.96-4.158a.75.75 0 1 1 1.08 1.04l-5.25 5.5a.75.75 0 0 1-1.08 0l-5.25-5.5a.75.75 0 1 1 1.08-1.04l3.96 4.158V3.75A.75.75 0 0 1 10 3Z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        </a>
+
+        <LanguagePicker lang={lang} />
+      </div>
+    </div>
+
+    <!-- Mobile Header Controls -->
+    <div class="flex md:hidden items-center gap-2">
+      <LanguagePicker lang={lang} />
+
+      <button
+        type="button"
+        id="mobile-menu-toggle"
+        class="flex items-center justify-center w-11 h-11 rounded-lg border border-border bg-surface text-ink hover:bg-canvas transition-colors focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none select-none"
+        aria-expanded="false"
+        aria-controls="mobile-menu-drawer"
+        aria-label={t('a11y.openMenu')}
+      >
+        <svg
+          class="w-5 h-5 transition-transform"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="2"
+          stroke="currentColor"
+          aria-hidden="true"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Drawer Backdrop -->
+  <div
+    id="mobile-menu-backdrop"
+    class="fixed inset-0 z-40 bg-ink/40 backdrop-blur-xs transition-opacity duration-300 opacity-0 pointer-events-none md:hidden"
+    aria-hidden="true"
+  ></div>
+
+  <!-- Mobile Drawer Panel -->
+  <div
+    id="mobile-menu-drawer"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Mobile Navigation"
+    aria-hidden="true"
+    class="fixed inset-y-0 right-0 z-50 w-full max-w-xs bg-surface border-l border-border shadow-2xl p-6 flex flex-col justify-between transition-transform duration-300 ease-in-out translate-x-full invisible md:hidden"
+  >
+    <div>
+      <!-- Drawer Header -->
+      <div class="flex items-center justify-between pb-4 border-b border-border">
+        <div class="flex items-center gap-2.5">
+          <span
+            class="flex h-8 w-8 items-center justify-center rounded-lg bg-ink text-canvas font-mono text-xs font-bold tracking-wider"
+          >
+            DL
+          </span>
+          <span class="text-sm font-bold tracking-tight text-ink">
+            {siteConfig.name}
+          </span>
+        </div>
+        <button
+          type="button"
+          id="mobile-menu-close"
+          class="flex items-center justify-center w-11 h-11 rounded-lg border border-border bg-surface text-ink hover:bg-canvas transition-colors focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none"
+          aria-label={t('a11y.closeMenu')}
+        >
+          <svg
+            class="w-5 h-5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="currentColor"
+            aria-hidden="true"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Navigation Links -->
+      <nav class="flex flex-col gap-1.5 mt-6" aria-label="Mobile Navigation Links">
+        {
+          navItems.map((item) => (
+            <a
+              href={item.href}
+              class="flex items-center min-h-[44px] px-3.5 py-2.5 rounded-lg text-sm font-medium text-ink hover:bg-canvas hover:text-accent transition-colors focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none"
+            >
+              {item.label}
+            </a>
+          ))
+        }
+        <a
+          href={siteConfig.links.resume}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex items-center justify-between min-h-[44px] px-3.5 py-2.5 mt-2 rounded-lg border border-border bg-canvas/60 text-sm font-mono font-medium text-ink hover:bg-surface hover:text-accent hover:border-accent transition-all focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none"
+        >
+          <span>{t('nav.resume')} (PDF)</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            class="w-4 h-4 text-muted"
+            aria-hidden="true"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M10 3a.75.75 0 0 1 .75.75v10.638l3.96-4.158a.75.75 0 1 1 1.08 1.04l-5.25 5.5a.75.75 0 0 1-1.08 0l-5.25-5.5a.75.75 0 1 1 1.08-1.04l3.96 4.158V3.75A.75.75 0 0 1 10 3Z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        </a>
+      </nav>
+    </div>
+
+    <!-- Drawer Footer: Language & Info -->
+    <div class="pt-6 border-t border-border flex flex-col gap-4">
+      <div class="flex items-center justify-between">
+        <span class="text-xs font-mono text-muted uppercase tracking-wider">
+          {lang === 'vi' ? 'Ngôn ngữ' : 'Language'}
+        </span>
+        <LanguagePicker lang={lang} />
+      </div>
+      <div class="text-[11px] font-mono text-muted">
+        <span>{siteConfig.author}</span>
+        <span class="mx-1.5">•</span>
+        <span>{lang === 'vi' ? 'Hà Nội, Việt Nam' : 'Hanoi, Vietnam'}</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  function initMobileNav() {
+    const toggleBtn = document.getElementById('mobile-menu-toggle');
+    const closeBtn = document.getElementById('mobile-menu-close');
+    const drawer = document.getElementById('mobile-menu-drawer');
+    const backdrop = document.getElementById('mobile-menu-backdrop');
+
+    if (!toggleBtn || !drawer || !backdrop) return;
+    if (toggleBtn.dataset.initialized === 'true') return;
+    toggleBtn.dataset.initialized = 'true';
+
+    function getFocusableElements(): HTMLElement[] {
+      if (!drawer) return [];
+      const selector =
+        'a[href]:not([disabled]), button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+      return Array.from(drawer.querySelectorAll<HTMLElement>(selector)).filter(
+        (el) => el.offsetParent !== null || el.offsetWidth > 0 || el.offsetHeight > 0
+      );
+    }
+
+    function openMenu() {
+      drawer?.classList.remove('invisible', 'translate-x-full');
+      drawer?.classList.add('translate-x-0');
+      drawer?.setAttribute('aria-hidden', 'false');
+
+      backdrop?.classList.remove('opacity-0', 'pointer-events-none');
+      backdrop?.classList.add('opacity-100');
+
+      toggleBtn?.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+
+      // Focus close button or first element inside drawer
+      setTimeout(() => {
+        if (closeBtn) {
+          closeBtn.focus();
+        } else {
+          const focusables = getFocusableElements();
+          if (focusables.length > 0) focusables[0].focus();
+        }
+      }, 50);
+    }
+
+    function closeMenu() {
+      drawer?.classList.remove('translate-x-0');
+      drawer?.classList.add('translate-x-full');
+      drawer?.setAttribute('aria-hidden', 'true');
+
+      backdrop?.classList.remove('opacity-100');
+      backdrop?.classList.add('opacity-0', 'pointer-events-none');
+
+      toggleBtn?.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+
+      setTimeout(() => {
+        if (toggleBtn?.getAttribute('aria-expanded') === 'false') {
+          drawer?.classList.add('invisible');
+        }
+      }, 300);
+
+      toggleBtn?.focus();
+    }
+
+    function handleKeyDown(e: KeyboardEvent) {
+      const isExpanded = toggleBtn?.getAttribute('aria-expanded') === 'true';
+      if (!isExpanded) return;
+
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        closeMenu();
+        return;
+      }
+
+      if (e.key === 'Tab') {
+        const focusables = getFocusableElements();
+        if (focusables.length === 0) return;
+
+        const firstElement = focusables[0];
+        const lastElement = focusables[focusables.length - 1];
+
+        if (e.shiftKey) {
+          if (document.activeElement === firstElement || !drawer?.contains(document.activeElement)) {
+            e.preventDefault();
+            lastElement.focus();
+          }
+        } else {
+          if (document.activeElement === lastElement || !drawer?.contains(document.activeElement)) {
+            e.preventDefault();
+            firstElement.focus();
+          }
+        }
+      }
+    }
+
+    toggleBtn.addEventListener('click', () => {
+      const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+      if (isExpanded) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    });
+
+    closeBtn?.addEventListener('click', closeMenu);
+    backdrop?.addEventListener('click', closeMenu);
+
+    // Close when clicking internal links in the drawer
+    drawer.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        closeMenu();
+      });
+    });
+
+    document.addEventListener('keydown', handleKeyDown);
+
+    // Close drawer when resized to desktop breakpoint
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 768 && toggleBtn?.getAttribute('aria-expanded') === 'true') {
+        closeMenu();
+      }
+    });
+  }
+
+  // Support direct load & Astro page swap
+  initMobileNav();
+  document.addEventListener('astro:page-load', initMobileNav);
+</script>
