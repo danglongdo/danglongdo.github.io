@@ -1,0 +1,13 @@
+#:schema node_modules/wrangler/config-schema.json
+name = "portfolio"
+compatibility_date = "2025-01-01"
+compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = "dist"
+
+# Cloudflare Pages Configuration (Free Tier, 0 VND)
+# Build command: npm run build (or bun run build)
+# Build output directory: dist
+# Node.js version: 22+
+
+[vars]
+NODE_VERSION = "22"
