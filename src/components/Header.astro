@@ -36,22 +36,15 @@ const navItems = [
     <!-- Brand Mark & Identity -->
     <a
       href={homeUrl}
-      class="group flex items-center gap-3 rounded-lg focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none select-none"
+      class="group flex items-center gap-2 rounded-lg py-1 px-1.5 -ml-1.5 focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none select-none"
       aria-label={`${siteConfig.name} - ${lang === 'vi' ? 'Trang chủ' : 'Home'}`}
     >
-      <span
-        class="flex h-9 w-9 items-center justify-center rounded-lg bg-ink text-canvas font-mono text-sm font-bold tracking-wider group-hover:bg-accent group-hover:text-white transition-colors shadow-xs"
-      >
-        DL
+      <span class="text-base sm:text-lg font-semibold tracking-tight text-ink group-hover:text-accent transition-colors">
+        {siteConfig.name}
       </span>
-      <div class="flex flex-col">
-        <span class="text-sm font-bold tracking-tight text-ink group-hover:text-accent transition-colors leading-tight">
-          {siteConfig.name}
-        </span>
-        <span class="hidden sm:block text-[11px] font-mono text-muted tracking-tight leading-none mt-0.5">
-          {lang === 'vi' ? 'Kỹ sư .NET & AI Doanh nghiệp' : '.NET & Enterprise AI'}
-        </span>
-      </div>
+      <span class="hidden sm:inline-block text-xs font-mono text-muted/80 tracking-tight border-l border-border pl-2.5 py-0.5 ml-1">
+        {lang === 'vi' ? '.NET & AI Doanh nghiệp' : '.NET & Enterprise AI'}
+      </span>
     </a>
 
     <!-- Desktop Navigation & Controls -->
@@ -144,14 +137,12 @@ const navItems = [
     <div>
       <!-- Drawer Header -->
       <div class="flex items-center justify-between pb-4 border-b border-border">
-        <div class="flex items-center gap-2.5">
-          <span
-            class="flex h-8 w-8 items-center justify-center rounded-lg bg-ink text-canvas font-mono text-xs font-bold tracking-wider"
-          >
-            DL
-          </span>
-          <span class="text-sm font-bold tracking-tight text-ink">
+        <div class="flex flex-col">
+          <span class="text-base font-semibold tracking-tight text-ink">
             {siteConfig.name}
+          </span>
+          <span class="text-xs font-mono text-muted/80 tracking-tight mt-0.5">
+            {lang === 'vi' ? '.NET & AI Doanh nghiệp' : '.NET & Enterprise AI'}
           </span>
         </div>
         <button
