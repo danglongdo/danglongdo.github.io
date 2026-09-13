@@ -1,0 +1,23 @@
+# Build output
+dist/
+
+# Dependencies
+node_modules/
+
+# Astro runtime & cache
+.astro/
+
+# Environment variables
+.env
+.env.production
+.env.local
+.env.*.local
+!.env.example
+
+# OS & Editor files
+.DS_Store
+Thumbs.db
+
+# Agent & Tooling metadata
+.codegraph
+.omo/
