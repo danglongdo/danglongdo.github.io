@@ -1,17 +1,26 @@
 ---
 import '../styles/global.css';
 import Header from '../components/Header.astro';
+import SEO from '../components/SEO.astro';
 
 export interface Props {
   title: string;
   description?: string;
   lang?: 'en' | 'vi';
+  canonicalUrl?: string;
+  ogImage?: string;
+  ogType?: 'website' | 'article' | 'profile';
+  noindex?: boolean;
 }
 
 const {
   title,
   description = 'Đỗ Đăng Long - .NET Full-Stack & Enterprise AI Automation Engineer',
   lang = 'en',
+  canonicalUrl,
+  ogImage,
+  ogType,
+  noindex,
 } = Astro.props;
 
 const skipLinkText = lang === 'vi' ? 'Chuyển đến nội dung chính' : 'Skip to content';
@@ -25,7 +34,15 @@ const skipLinkText = lang === 'vi' ? 'Chuyển đến nội dung chính' : 'Skip
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
-    {description && <meta name="description" content={description} />}
+    <SEO
+      title={title}
+      description={description}
+      lang={lang}
+      canonicalUrl={canonicalUrl}
+      ogImage={ogImage}
+      ogType={ogType}
+      noindex={noindex}
+    />
   </head>
   <body class="bg-canvas text-ink font-sans flex flex-col min-h-screen antialiased selection:bg-accent selection:text-white">
     <a

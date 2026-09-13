@@ -19,6 +19,7 @@
     "astro": "^5.4.1"
   },
   "devDependencies": {
+    "@astrojs/sitemap": "^3.7.4",
     "@astrojs/tailwind": "^6.0.2",
     "@playwright/test": "^1.63.0",
     "@types/node": "^22.13.0",

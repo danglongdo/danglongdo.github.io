@@ -1,0 +1,126 @@
+---
+import siteConfig from '../config/site';
+
+export interface Props {
+  title?: string;
+  description?: string;
+  lang?: 'en' | 'vi';
+  canonicalUrl?: string;
+  ogImage?: string;
+  ogType?: 'website' | 'article' | 'profile';
+  noindex?: boolean;
+}
+
+const {
+  title = `${siteConfig.name} - ${siteConfig.title}`,
+  description = siteConfig.description.en,
+  lang = 'en',
+  canonicalUrl: propCanonicalUrl,
+  ogImage = '/images/portrait-placeholder.svg',
+  ogType = 'website',
+  noindex = false,
+} = Astro.props;
+
+const siteUrl = siteConfig.url.replace(/\/+$/, '');
+const pathname = Astro.url.pathname;
+const is404 = pathname.includes('404') || noindex;
+
+// Clean up pathname to determine canonical and alternate hreflang links
+const cleanUrlPath = pathname.replace(/\/+$/, '') || '/';
+let unlocalizedPath = cleanUrlPath.replace(/^\/vi(\/|$)/, '$1') || '/';
+if (!unlocalizedPath.startsWith('/')) {
+  unlocalizedPath = '/' + unlocalizedPath;
+}
+
+const enPath = unlocalizedPath === '/' ? '/' : `${unlocalizedPath}/`;
+const viPath = unlocalizedPath === '/' ? '/vi/' : `/vi${unlocalizedPath}/`;
+
+const hrefLangEn = `${siteUrl}${enPath}`;
+const hrefLangVi = `${siteUrl}${viPath}`;
+const hrefLangDefault = hrefLangEn; // English as default fallback
+
+const computedCanonicalUrl = lang === 'vi' ? hrefLangVi : hrefLangEn;
+const canonicalUrl = propCanonicalUrl || computedCanonicalUrl;
+
+// Absolute image URL for social previews
+const absoluteOgImage = ogImage.startsWith('http')
+  ? ogImage
+  : `${siteUrl}${ogImage.startsWith('/') ? ogImage : '/' + ogImage}`;
+
+// Structured Data (Schema.org Person + WebSite JSON-LD)
+const personSchema = {
+  '@type': 'Person',
+  '@id': `${siteUrl}/#person`,
+  name: 'Đỗ Đăng Long',
+  jobTitle: '.NET Full-Stack & Enterprise AI Automation Engineer',
+  url: siteUrl,
+  image: `${siteUrl}/images/portrait-placeholder.svg`,
+  sameAs: [
+    siteConfig.links.github,
+    siteConfig.links.linkedin,
+  ],
+  knowsAbout: [
+    '.NET',
+    'C#',
+    'AI Agents',
+    'PostgreSQL',
+    'Redis',
+    'React',
+    'Next.js',
+  ],
+};
+
+const websiteSchema = {
+  '@type': 'WebSite',
+  '@id': `${siteUrl}/#website`,
+  name: siteConfig.name,
+  url: siteUrl,
+  inLanguage: ['en', 'vi'],
+};
+
+const jsonLdData = {
+  '@context': 'https://schema.org',
+  '@graph': [personSchema, websiteSchema],
+};
+---
+
+{/* General Meta Tags */}
+{description && <meta name="description" content={description} />}
+<meta name="author" content={siteConfig.author} />
+<link rel="sitemap" href="/sitemap-index.xml" />
+
+{/* Robots & Indexing */}
+{is404 ? (
+  <meta name="robots" content="noindex, nofollow" />
+) : (
+  <>
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="alternate" hreflang="en" href={hrefLangEn} />
+    <link rel="alternate" hreflang="vi" href={hrefLangVi} />
+    <link rel="alternate" hreflang="x-default" href={hrefLangDefault} />
+  </>
+)}
+
+{/* OpenGraph Protocol */}
+<meta property="og:site_name" content={siteConfig.name} />
+<meta property="og:title" content={title} />
+{description && <meta property="og:description" content={description} />}
+<meta property="og:type" content={ogType} />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:image" content={absoluteOgImage} />
+<meta property="og:image:alt" content={title} />
+<meta property="og:locale" content={lang === 'vi' ? 'vi_VN' : 'en_US'} />
+<meta property="og:locale:alternate" content={lang === 'vi' ? 'en_US' : 'vi_VN'} />
+
+{/* Twitter Cards */}
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+{description && <meta name="twitter:description" content={description} />}
+<meta name="twitter:image" content={absoluteOgImage} />
+<meta name="twitter:image:alt" content={title} />
+
+{/* Schema.org JSON-LD Structured Data */}
+{!is404 && (
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLdData)} />
+)}

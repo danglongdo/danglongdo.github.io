@@ -1,13 +1,24 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
+import sitemap from '@astrojs/sitemap';
 
 /** @type {import('astro').AstroUserConfig} */
 const config = {
+  site: 'https://longdd.dev',
   output: 'static',
   integrations: [
     tailwind({
       applyBaseStyles: false,
+    }),
+    sitemap({
+      i18n: {
+        defaultLocale: 'en',
+        locales: {
+          en: 'en',
+          vi: 'vi',
+        },
+      },
     }),
   ],
   i18n: {
