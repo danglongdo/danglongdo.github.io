@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build",
+    "generate:resume": "node scripts/generate-resume.mjs",
+    "prebuild": "node scripts/generate-resume.mjs",
+    "build": "node scripts/generate-resume.mjs && astro build",
     "preview": "astro preview",
     "test": "bun test",
     "test:unit": "bun test tests/unit",

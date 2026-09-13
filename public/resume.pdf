@@ -1,0 +1,309 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<<
+  /Type /Catalog
+  /Pages 2 0 R
+>>
+endobj
+2 0 obj
+<<
+  /Type /Pages
+  /Kids [3 0 R]
+  /Count 1
+>>
+endobj
+3 0 obj
+<<
+  /Type /Annot
+  /Subtype /Link
+  /Rect [179.9 729.0 277.0 739.0]
+  /Border [0 0 0]
+  /A <<
+    /Type /Action
+    /S /URI
+    /URI (mailto:longdd.contact@gmail.com)
+  >>
+>>
+endobj
+4 0 obj
+<<
+  /Type /Annot
+  /Subtype /Link
+  /Rect [71.5 717.5 173.0 727.5]
+  /Border [0 0 0]
+  /A <<
+    /Type /Action
+    /S /URI
+    /URI (https://github.com/lombeo)
+  >>
+>>
+endobj
+5 0 obj
+<<
+  /Type /Annot
+  /Subtype /Link
+  /Rect [228.4 717.5 350.8 727.5]
+  /Border [0 0 0]
+  /A <<
+    /Type /Action
+    /S /URI
+    /URI (https://linkedin.com/in/longdd)
+  >>
+>>
+endobj
+6 0 obj
+<<
+  /Type /Annot
+  /Subtype /Link
+  /Rect [307.3 729.0 379.5 739.0]
+  /Border [0 0 0]
+  /A <<
+    /Type /Action
+    /S /URI
+    /URI (https://longdd.dev)
+  >>
+>>
+endobj
+7 0 obj
+<<
+  /Type /Page
+  /Parent 2 0 R
+  /MediaBox [0 0 612 792]
+  /Contents 4 0 R
+  /Resources <<
+    /Font <<
+      /F1 5 0 R
+      /F2 6 0 R
+      /F3 7 0 R
+    >>
+    /ProcSet [/PDF /Text]
+  >>
+  /Annots [3 0 R 4 0 R 5 0 R 6 0 R]
+>>
+endobj
+8 0 obj
+<<
+  /Length 8510
+>>
+stream
+0.09 0.10 0.11 rg
+BT /F1 19 Tf 1 0 0 1 38.00 758.00 Tm (DO DANG LONG) Tj ET
+0.36 0.40 0.44 rg
+BT /F1 9.5 Tf 1 0 0 1 210.00 759.00 Tm (\(◊ ng Long\)) Tj ET
+0.14 0.34 0.84 rg
+BT /F1 10.5 Tf 1 0 0 1 38.00 743.00 Tm (.NET Full-Stack & Enterprise AI Automation Engineer) Tj ET
+0.36 0.40 0.44 rg
+BT /F2 8.5 Tf 1 0 0 1 38.00 730.00 Tm (Da Nang / Hanoi, Vietnam  |  longdd.contact@gmail.com  |  Portfolio: https://longdd.dev) Tj ET
+0.36 0.40 0.44 rg
+BT /F2 8.5 Tf 1 0 0 1 38.00 718.50 Tm (GitHub: https://github.com/lombeo  |  LinkedIn: https://linkedin.com/in/longdd) Tj ET
+0.14 0.34 0.84 RG
+0.75 w 38.00 710.50 m 574.00 710.50 l S
+0.14 0.34 0.84 rg
+BT /F1 10 Tf 1 0 0 1 38.00 697.50 Tm (PROFESSIONAL SUMMARY) Tj ET
+0.85 0.87 0.88 RG
+0.6 w 38.00 694.00 m 574.00 694.00 l S
+0.09 0.10 0.11 rg
+BT /F2 8.25 Tf 1 0 0 1 38.00 683.50 Tm (Results-driven Full-Stack & Enterprise AI Automation Engineer specializing in ASP.NET Core 8, distributed architectures,) Tj ET
+0.09 0.10 0.11 rg
+BT /F2 8.25 Tf 1 0 0 1 38.00 673.00 Tm (high-throughput Redis caching, and multi-agent workflow systems. Proven engineering impact delivering robust, scalable) Tj ET
+0.09 0.10 0.11 rg
+BT /F2 8.25 Tf 1 0 0 1 38.00 662.50 Tm (production platforms across NAL Vietnam, CodeLearn \(FPT Information System\), and large-scale enterprise systems.) Tj ET
+0.14 0.34 0.84 rg
+BT /F1 10 Tf 1 0 0 1 38.00 648.00 Tm (TECHNICAL SKILLS) Tj ET
+0.85 0.87 0.88 RG
+0.6 w 38.00 644.50 m 574.00 644.50 l S
+0.09 0.10 0.11 rg
+BT /F1 8.25 Tf 1 0 0 1 38.00 634.00 Tm (Languages & Core: ) Tj ET
+0.36 0.40 0.44 rg
+BT /F2 8.25 Tf 1 0 0 1 112.42 634.00 Tm (C#, .NET 8, ASP.NET Core, TypeScript, JavaScript, SQL, Python, Go, Node.js, Bun) Tj ET
+0.09 0.10 0.11 rg
+BT /F1 8.25 Tf 1 0 0 1 38.00 623.00 Tm (Backend & Architecture: ) Tj ET
+0.36 0.40 0.44 rg
+BT /F2 8.25 Tf 1 0 0 1 138.13 623.00 Tm (Clean Architecture, Domain-Driven Design \(DDD\), EF Core 7, SignalR, RESTful APIs, Microservices) Tj ET
+0.09 0.10 0.11 rg
+BT /F1 8.25 Tf 1 0 0 1 38.00 612.00 Tm (Databases & Caching: ) Tj ET
+0.36 0.40 0.44 rg
+BT /F2 8.25 Tf 1 0 0 1 125.28 612.00 Tm (PostgreSQL, Redis \(Distributed Cache-Aside, Pub/Sub Invalidation\), Supabase) Tj ET
+0.09 0.10 0.11 rg
+BT /F1 8.25 Tf 1 0 0 1 38.00 601.00 Tm (Frontend Engineering: ) Tj ET
+0.36 0.40 0.44 rg
+BT /F2 8.25 Tf 1 0 0 1 130.96 601.00 Tm (React, Next.js, Vue 3, Refine, Tailwind CSS, Astro, Optimistic UI) Tj ET
+0.09 0.10 0.11 rg
+BT /F1 8.25 Tf 1 0 0 1 38.00 590.00 Tm (Enterprise AI & Automation: ) Tj ET
+0.36 0.40 0.44 rg
+BT /F2 8.25 Tf 1 0 0 1 156.93 590.00 Tm (AI Agents, Multi-Agent Workflows, Mattermost Chatbots, Tool Calling, Supabase Edge Functions) Tj ET
+0.09 0.10 0.11 rg
+BT /F1 8.25 Tf 1 0 0 1 38.00 579.00 Tm (DevOps & Testing: ) Tj ET
+0.36 0.40 0.44 rg
+BT /F2 8.25 Tf 1 0 0 1 113.99 579.00 Tm (Docker, Git, GitHub Actions, CI/CD, Linux, Playwright, Vitest, Unit Testing) Tj ET
+0.14 0.34 0.84 rg
+BT /F1 10 Tf 1 0 0 1 38.00 564.00 Tm (PROFESSIONAL EXPERIENCE) Tj ET
+0.85 0.87 0.88 RG
+0.6 w 38.00 560.50 m 574.00 560.50 l S
+0.09 0.10 0.11 rg
+BT /F1 9 Tf 1 0 0 1 38.00 550.00 Tm (NAL Vietnam) Tj ET
+0.36 0.40 0.44 rg
+BT /F3 8 Tf 1 0 0 1 509.60 550.00 Tm (Da Nang, Vietnam) Tj ET
+0.14 0.34 0.84 rg
+BT /F1 8.25 Tf 1 0 0 1 38.00 539.50 Tm (Full-Stack & Enterprise AI Automation Engineer) Tj ET
+0.36 0.40 0.44 rg
+BT /F1 8 Tf 1 0 0 1 516.93 539.50 Tm (2025 - Present) Tj ET
+0.14 0.34 0.84 rg
+BT /F1 8 Tf 1 0 0 1 40.00 529.50 Tm (-) Tj ET
+0.09 0.10 0.11 rg
+BT /F2 8 Tf 1 0 0 1 50.00 529.50 Tm (Designed and deployed conversational multi-agent automation systems on Mattermost, streamlining cross-departmental operations including) Tj ET
+0.09 0.10 0.11 rg
+BT /F2 8 Tf 1 0 0 1 50.00 520.00 Tm (recruiting assistance, company policy inquiries, employee feedback dispatching, and automated meeting scheduling.) Tj ET
+0.14 0.34 0.84 rg
+BT /F1 8 Tf 1 0 0 1 40.00 510.50 Tm (-) Tj ET
+0.09 0.10 0.11 rg
+BT /F2 8 Tf 1 0 0 1 50.00 510.50 Tm (Engineered data-dense enterprise ERP operations dashboards using Refine, React, and TypeScript with secure row-level security \(RLS\)) Tj ET
+0.09 0.10 0.11 rg
+BT /F2 8 Tf 1 0 0 1 50.00 501.00 Tm (policies on Supabase and PostgreSQL.) Tj ET
+0.14 0.34 0.84 rg
+BT /F1 8 Tf 1 0 0 1 40.00 491.50 Tm (-) Tj ET
+0.09 0.10 0.11 rg
+BT /F2 8 Tf 1 0 0 1 50.00 491.50 Tm (Built high-throughput serverless background task orchestrators with Supabase Edge Functions, reducing manual operational overhead across) Tj ET
+0.09 0.10 0.11 rg
+BT /F2 8 Tf 1 0 0 1 50.00 482.00 Tm (enterprise teams.) Tj ET
+0.09 0.10 0.11 rg
+BT /F1 9 Tf 1 0 0 1 38.00 468.50 Tm (SEP490 Capstone \(FPT University\)) Tj ET
+0.36 0.40 0.44 rg
+BT /F3 8 Tf 1 0 0 1 517.52 468.50 Tm (Hanoi, Vietnam) Tj ET
+0.14 0.34 0.84 rg
+BT /F1 8.25 Tf 1 0 0 1 38.00 458.00 Tm (Backend Lead & System Architect) Tj ET
+0.36 0.40 0.44 rg
+BT /F1 8 Tf 1 0 0 1 529.23 458.00 Tm (2024 - 2025) Tj ET
+0.14 0.34 0.84 rg
+BT /F1 8 Tf 1 0 0 1 40.00 448.00 Tm (-) Tj ET
+0.09 0.10 0.11 rg
+BT /F2 8 Tf 1 0 0 1 50.00 448.00 Tm (Led backend engineering and system architecture contributing 340+ commits \(~80% of backend codebase\) for the Site Leveling Management) Tj ET
+0.09 0.10 0.11 rg
+BT /F2 8 Tf 1 0 0 1 50.00 438.50 Tm (System \(SLMS\) using ASP.NET Core 8, EF Core 7, and PostgreSQL.) Tj ET
+0.14 0.34 0.84 rg
+BT /F1 8 Tf 1 0 0 1 40.00 429.00 Tm (-) Tj ET
+0.09 0.10 0.11 rg
+BT /F2 8 Tf 1 0 0 1 50.00 429.00 Tm (Architected distributed pessimistic plan edit locking mechanism with client heartbeat renewals and automated background cleanup workers,) Tj ET
+0.09 0.10 0.11 rg
+BT /F2 8 Tf 1 0 0 1 50.00 419.50 Tm (eliminating multi-user edit race conditions during concurrent planning.) Tj ET
+0.14 0.34 0.84 rg
+BT /F1 8 Tf 1 0 0 1 40.00 410.00 Tm (-) Tj ET
+0.09 0.10 0.11 rg
+BT /F2 8 Tf 1 0 0 1 50.00 410.00 Tm (Integrated SignalR real-time event broadcasting and Redis distributed cache-aside pattern for excavation plan calculations, accelerating) Tj ET
+0.09 0.10 0.11 rg
+BT /F2 8 Tf 1 0 0 1 50.00 400.50 Tm (responsive updates across distributed client sessions.) Tj ET
+0.14 0.34 0.84 rg
+BT /F1 8 Tf 1 0 0 1 40.00 391.00 Tm (-) Tj ET
+0.09 0.10 0.11 rg
+BT /F2 8 Tf 1 0 0 1 50.00 391.00 Tm (Collaborated with Vue 3 frontend engineers, authoring type-safe REST APIs, automated Swagger schemas, and integration test suites.) Tj ET
+0.09 0.10 0.11 rg
+BT /F1 9 Tf 1 0 0 1 38.00 377.50 Tm (FPT Information System \(FIS\)) Tj ET
+0.36 0.40 0.44 rg
+BT /F3 8 Tf 1 0 0 1 517.52 377.50 Tm (Hanoi, Vietnam) Tj ET
+0.14 0.34 0.84 rg
+BT /F1 8.25 Tf 1 0 0 1 38.00 367.00 Tm (Full-Stack Software Engineer Intern) Tj ET
+0.36 0.40 0.44 rg
+BT /F1 8 Tf 1 0 0 1 495.81 367.00 Tm (Mar 2024 - Jan 2025) Tj ET
+0.14 0.34 0.84 rg
+BT /F1 8 Tf 1 0 0 1 40.00 357.00 Tm (-) Tj ET
+0.09 0.10 0.11 rg
+BT /F2 8 Tf 1 0 0 1 50.00 357.00 Tm (Developed core community and content modules for CodeLearn.io platform using ASP.NET Core Clean Architecture and Next.js.) Tj ET
+0.14 0.34 0.84 rg
+BT /F1 8 Tf 1 0 0 1 40.00 347.50 Tm (-) Tj ET
+0.09 0.10 0.11 rg
+BT /F2 8 Tf 1 0 0 1 50.00 347.50 Tm (Built high-traffic Discussion Forum Q&A with recursive comment trees, optimistic UI updates, and XSS sanitization pipelines in) Tj ET
+0.09 0.10 0.11 rg
+BT /F2 8 Tf 1 0 0 1 50.00 338.00 Tm (PostgreSQL and Next.js.) Tj ET
+0.14 0.34 0.84 rg
+BT /F1 8 Tf 1 0 0 1 40.00 328.50 Tm (-) Tj ET
+0.09 0.10 0.11 rg
+BT /F2 8 Tf 1 0 0 1 50.00 328.50 Tm (Engineered technical editorial blog engine with revision statuses, automated SEO slug generation, and Incremental Static Regeneration) Tj ET
+0.09 0.10 0.11 rg
+BT /F2 8 Tf 1 0 0 1 50.00 319.00 Tm (\(ISR\).) Tj ET
+0.14 0.34 0.84 rg
+BT /F1 8 Tf 1 0 0 1 40.00 309.50 Tm (-) Tj ET
+0.09 0.10 0.11 rg
+BT /F2 8 Tf 1 0 0 1 50.00 309.50 Tm (Configured Redis distributed caching \(95% hit ratio\) and Redis Pub/Sub invalidation channels across distributed service replicas to) Tj ET
+0.09 0.10 0.11 rg
+BT /F2 8 Tf 1 0 0 1 50.00 300.00 Tm (guarantee cache consistency.) Tj ET
+0.14 0.34 0.84 rg
+BT /F1 10 Tf 1 0 0 1 38.00 286.50 Tm (EDUCATION) Tj ET
+0.85 0.87 0.88 RG
+0.6 w 38.00 283.00 m 574.00 283.00 l S
+0.09 0.10 0.11 rg
+BT /F1 9 Tf 1 0 0 1 38.00 272.50 Tm (FPT University) Tj ET
+0.36 0.40 0.44 rg
+BT /F3 8 Tf 1 0 0 1 517.52 272.50 Tm (Hanoi, Vietnam) Tj ET
+0.14 0.34 0.84 rg
+BT /F1 8.25 Tf 1 0 0 1 38.00 262.00 Tm (Bachelor of Software Engineering) Tj ET
+0.36 0.40 0.44 rg
+BT /F1 8 Tf 1 0 0 1 529.23 262.00 Tm (2021 - 2025) Tj ET
+0.36 0.40 0.44 rg
+BT /F2 8 Tf 1 0 0 1 50.00 252.00 Tm (Focus: Distributed Systems, Software Architecture, Database Systems, Cloud Computing, Algorithms.) Tj ET
+
+endstream
+endobj
+9 0 obj
+<<
+  /Type /Font
+  /Subtype /Type1
+  /BaseFont /Helvetica-Bold
+  /Encoding /WinAnsiEncoding
+>>
+endobj
+10 0 obj
+<<
+  /Type /Font
+  /Subtype /Type1
+  /BaseFont /Helvetica
+  /Encoding /WinAnsiEncoding
+>>
+endobj
+11 0 obj
+<<
+  /Type /Font
+  /Subtype /Type1
+  /BaseFont /Helvetica-Oblique
+  /Encoding /WinAnsiEncoding
+>>
+endobj
+12 0 obj
+<<
+  /Title <FEFF0052006500730075006D00650020002D002001101ED7002001100103006E00670020004C006F006E006700200028002E004E00450054002000460075006C006C002D0053007400610063006B0020002600200045006E007400650072007000720069007300650020004100490020004100750074006F006D006100740069006F006E00200045006E00670069006E0065006500720029>
+  /Author <FEFF01101ED7002001100103006E00670020004C006F006E0067>
+  /Subject <FEFF004100540053002D0046007200690065006E0064006C007900200044006500760065006C006F00700065007200200052006500730075006D0065>
+  /Keywords (C#, .NET 8, ASP.NET Core, PostgreSQL, Redis, SignalR, React, Next.js, Supabase, AI Agents)
+  /Creator (Portfolio Resume Generator)
+  /Producer (Node.js ATS-Compliant PDF 1.4 Generator)
+  /CreationDate (D:20260913111534Z)
+  /ModDate (D:20260913111534Z)
+>>
+endobj
+xref
+0 13
+0000000000 65535 f 
+0000000015 00000 n 
+0000000068 00000 n 
+0000000131 00000 n 
+0000000322 00000 n 
+0000000506 00000 n 
+0000000696 00000 n 
+0000000874 00000 n 
+0000001120 00000 n 
+0000009684 00000 n 
+0000009794 00000 n 
+0000009900 00000 n 
+0000010014 00000 n 
+trailer
+<<
+  /Size 13
+  /Root 1 0 R
+  /Info 12 0 R
+>>
+startxref
+10816
+%%EOF
+
+% [Candidate: ƒê·ªó ƒêƒÉng Long]
+% [Role: .NET Full-Stack & Enterprise AI Automation Engineer]
