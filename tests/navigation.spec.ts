@@ -64,6 +64,36 @@ test.describe('Header & Responsive Navigation Suite', () => {
     await expect(page.locator('html')).toHaveAttribute('lang', 'en');
   });
 
+  const projectSlugs = [
+    'nal-ai-automation-erp',
+    'sep490-construction-slms',
+    'codelearn-community-content',
+  ];
+
+  for (const slug of projectSlugs) {
+    test(`toggles language bidirectionally on case study route /projects/${slug}`, async ({ page }) => {
+      await page.setViewportSize({ width: 1280, height: 800 });
+
+      const enUrl = `/projects/${slug}`;
+      await page.goto(enUrl);
+    await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+
+    const viButton = page.locator('header a[data-lang-switch="vi"]').first();
+    await expect(viButton).toBeVisible();
+    await viButton.click();
+
+    await expect(page).toHaveURL(new RegExp(`/vi/projects/${slug}/?$`));
+    await expect(page.locator('html')).toHaveAttribute('lang', 'vi');
+
+    const enButton = page.locator('header a[data-lang-switch="en"]').first();
+    await expect(enButton).toBeVisible();
+    await enButton.click();
+
+    await expect(page).toHaveURL(new RegExp(`/projects/${slug}/?$`));
+    await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+    });
+  }
+
   test('QA failure scenario: mobile drawer opens with keyboard trapping and closes on Escape key', async ({
     page,
   }) => {
@@ -91,9 +121,8 @@ test.describe('Header & Responsive Navigation Suite', () => {
     await expect(closeBtn).toBeFocused();
 
     // Verify keyboard trapping inside drawer
-    // Tab cycling test: tab through elements and verify active element stays inside drawer
     await page.keyboard.press('Tab');
-    let activeInside = await drawer.evaluate((node) => node.contains(document.activeElement));
+    const activeInside = await drawer.evaluate((node) => node.contains(document.activeElement));
     expect(activeInside).toBe(true);
 
     // Press Escape key -> should close drawer
@@ -110,7 +139,6 @@ test.describe('Header & Responsive Navigation Suite', () => {
 
     const toggleBtn = page.locator('#mobile-menu-toggle');
     const closeBtn = page.locator('#mobile-menu-close');
-    const drawer = page.locator('#mobile-menu-drawer');
     const backdrop = page.locator('#mobile-menu-backdrop');
 
     // Test 1: Close via close button
@@ -124,5 +152,67 @@ test.describe('Header & Responsive Navigation Suite', () => {
     await expect(toggleBtn).toHaveAttribute('aria-expanded', 'true');
     await backdrop.click({ position: { x: 10, y: 10 } });
     await expect(toggleBtn).toHaveAttribute('aria-expanded', 'false');
+  });
+
+  test('crawls all pages and asserts all internal <a> links return HTTP 200', async ({ page, request }) => {
+    const allPages = [
+      '/',
+      '/vi',
+      '/projects/nal-ai-automation-erp',
+      '/projects/sep490-construction-slms',
+      '/projects/codelearn-community-content',
+      '/vi/projects/nal-ai-automation-erp',
+      '/vi/projects/sep490-construction-slms',
+      '/vi/projects/codelearn-community-content',
+    ];
+
+    const discoveredInternalUrls = new Set<string>();
+    const anchorChecks: { pageUrl: string; hash: string }[] = [];
+
+    for (const pageUrl of allPages) {
+      await page.goto(pageUrl);
+      await expect(page.locator('main#main-content')).toBeVisible();
+
+      // Collect all href attributes on the page
+      const hrefs = await page.locator('a[href]').evaluateAll((links) =>
+        links.map((link) => link.getAttribute('href')).filter((h): h is string => Boolean(h))
+      );
+
+      for (const href of hrefs) {
+        if (href.startsWith('#')) {
+          anchorChecks.push({ pageUrl, hash: href.slice(1) });
+        } else if (href.startsWith('mailto:') || href.startsWith('tel:') || href.startsWith('javascript:')) {
+          continue;
+        } else if (href.startsWith('http://') || href.startsWith('https://')) {
+          continue;
+        } else {
+          const [pathOnly, hashPart] = href.split('#');
+          if (pathOnly) {
+            discoveredInternalUrls.add(pathOnly);
+          }
+          if (hashPart) {
+            const targetPage = pathOnly || pageUrl;
+            anchorChecks.push({ pageUrl: targetPage, hash: hashPart });
+          }
+        }
+      }
+    }
+
+    expect(discoveredInternalUrls.size).toBeGreaterThan(0);
+
+    for (const urlPath of discoveredInternalUrls) {
+      const response = await request.get(urlPath);
+      expect(
+        response.status(),
+        `Expected HTTP 200 for internal link "${urlPath}", but received status ${response.status()}`
+      ).toBe(200);
+    }
+
+    for (const { pageUrl, hash } of anchorChecks) {
+      await page.goto(pageUrl);
+      const targetElement = page.locator(`#${hash}`);
+      const count = await targetElement.count();
+      expect(count, `Expected element with id="${hash}" on page "${pageUrl}" to exist`).toBeGreaterThan(0);
+    }
   });
 });

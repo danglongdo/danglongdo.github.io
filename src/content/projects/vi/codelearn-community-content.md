@@ -26,8 +26,6 @@ outcome: "Tăng tốc độ tải luồng thảo luận hơn 70% trong các đ�
 reflection: "Nhận thức sâu sắc tầm quan trọng then chốt của chiến lược vô hiệu hóa cache trong kiến trúc microservices. Ngay cả khi định hướng sản phẩm thay đổi—như tính năng tuyển dụng doanh nghiệp bị tạm gác lại theo chiến lược mới của tổ chức—việc duy trì mã nguồn dạng mô-đun theo Clean Architecture đảm bảo logic nghiệp vụ luôn sạch, dễ kiểm thử và có thể tái sử dụng."
 ---
 
-# Hạ tầng Nội dung & Cộng đồng Lập trình viên (CodeLearn)
-
 ## Tổng quan & Bối cảnh Dự án
 
 CodeLearn (nền tảng được phát triển và vận hành bởi Công ty TNHH Hệ thống Thông tin FPT - FPT Information System / FIS) là một trong những nền tảng giáo dục lập trình và tổ chức thi đấu thuật toán hàng đầu tại Việt Nam, phục vụ cộng đồng hàng trăm nghìn kỹ sư phần mềm, sinh viên công nghệ và người đam mê lập trình.

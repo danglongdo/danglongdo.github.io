@@ -26,8 +26,6 @@ outcome: "Loại bỏ 100% xung đột ghi đè kế hoạch thi công qua hơn 
 reflection: "Đối với các phần mềm vận hành công trường thực tế, khóa lạc quan (optimistic locking) thường gây ức chế lớn cho người dùng khi lập kế hoạch dài; cơ chế khóa bi quan (pessimistic lease) với hiển thị trực quan và nhịp tim tự động (heartbeat) mang lại trải nghiệm tin cậy vượt trội cho kỹ sư hiện trường."
 ---
 
-# Hệ thống Quản lý Thi công San lấp Mặt bằng (SLMS)
-
 ## 1. Tóm tắt Dự án & Bối cảnh Vận hành
 
 **Hệ thống Quản lý Thi công San lấp Mặt bằng (Site Leveling Management System - SLMS)** là nền tảng điều hành dự án xây dựng công nghiệp được thiết kế để quản lý toàn diện các công trình san lấp và giải phóng mặt bằng quy mô lớn. Trong kỹ thuật xây dựng dân dụng, công tác đào đắp và san lấp mặt bằng là giai đoạn đòi hỏi chi phí đầu tư cao cùng độ phức tạp vận hành lớn:

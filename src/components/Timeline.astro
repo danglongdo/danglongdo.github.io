@@ -1,0 +1,172 @@
+---
+import { getCollection, render } from 'astro:content';
+import { defaultLang, type SupportedLanguage } from '../i18n/ui';
+import { useTranslations } from '../i18n/utils';
+
+export interface Props {
+  lang?: SupportedLanguage;
+  title?: string;
+  subtitle?: string;
+  class?: string;
+}
+
+const {
+  lang = defaultLang,
+  title,
+  subtitle,
+  class: className = '',
+} = Astro.props;
+
+const t = useTranslations(lang);
+const sectionTitle = title || t('section.experience');
+const sectionSubtitle = subtitle || (
+  lang === 'vi'
+    ? 'Hành trình phát triển từ kỹ sư full-stack doanh nghiệp đến tự động hóa AI tác tử.'
+    : 'Career trajectory from enterprise full-stack engineering to autonomous AI workflows.'
+);
+
+const allExperience = await getCollection('experience');
+
+// Filter by locale and sort by order ascending (1: NAL, 2: SEP490, 3: FIS)
+const experiences = allExperience
+  .filter((item) => item.data.locale === lang || item.id.startsWith(`${lang}/`))
+  .sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0));
+
+// Pre-render content markdown for each experience entry
+const renderedExperiences = await Promise.all(
+  experiences.map(async (entry) => {
+    const { Content } = await render(entry);
+    return {
+      entry,
+      Content,
+    };
+  })
+);
+---
+
+<section
+  id="experience"
+  class={`scroll-mt-16 py-12 ${className}`}
+  aria-labelledby="experience-heading"
+>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6">
+    <!-- Section Header -->
+    <div class="mb-10 sm:mb-12">
+      <span class="text-xs font-mono font-medium text-accent uppercase tracking-widest block mb-2">
+        {lang === 'vi' ? 'Lộ trình nghề nghiệp' : 'Career Progression'}
+      </span>
+      <h2
+        id="experience-heading"
+        class="text-2xl sm:text-3xl font-bold tracking-tight text-ink"
+      >
+        {sectionTitle}
+      </h2>
+      <p class="text-sm sm:text-base text-muted mt-2 max-w-2xl leading-relaxed">
+        {sectionSubtitle}
+      </p>
+    </div>
+
+    <!-- Timeline Container -->
+    <div class="relative border-l border-border ml-2.5 sm:ml-4 pl-5 sm:pl-8 space-y-10 sm:space-y-12">
+      {renderedExperiences.map(({ entry, Content }, index) => (
+        <article class="relative group">
+          <!-- Milestone Node Dot in Accent Color -->
+          <div
+            class="absolute -left-[27px] sm:-left-[39px] top-1.5 w-3.5 h-3.5 rounded-full bg-accent ring-4 ring-canvas transition-transform duration-200 group-hover:scale-125"
+            aria-hidden="true"
+          />
+
+          <!-- Card / Entry Content -->
+          <div class="bg-surface border border-border rounded-lg p-5 sm:p-6 shadow-sm transition-all duration-200 hover:border-accent/40 hover:shadow-md">
+            <!-- Header Row: Role, Organization & Period -->
+            <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1.5 sm:gap-4">
+              <div>
+                <h3 class="text-base sm:text-lg font-semibold text-ink tracking-tight flex flex-wrap items-center gap-2">
+                  <span>{entry.data.role}</span>
+                  {index === 0 && (
+                    <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-mono font-medium bg-accent/10 text-accent border border-accent/20">
+                      {lang === 'vi' ? 'Hiện tại' : 'Current'}
+                    </span>
+                  )}
+                </h3>
+                <div class="text-accent font-medium text-sm sm:text-base mt-0.5">
+                  {entry.data.company}
+                </div>
+              </div>
+
+              <!-- Period & Location Badges -->
+              <div class="flex flex-wrap items-center gap-2 text-xs font-mono text-muted shrink-0 mt-1 sm:mt-0">
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-canvas border border-border">
+                  <svg
+                    class="w-3.5 h-3.5 text-muted shrink-0"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    aria-hidden="true"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                    />
+                  </svg>
+                  <span>{entry.data.period}</span>
+                </span>
+                {entry.data.location && (
+                  <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-canvas border border-border">
+                    <svg
+                      class="w-3.5 h-3.5 text-muted shrink-0"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      aria-hidden="true"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                      />
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                      />
+                    </svg>
+                    <span>{entry.data.location}</span>
+                  </span>
+                )}
+              </div>
+            </div>
+
+            <!-- Role Summary Description -->
+            {entry.data.description && (
+              <p class="text-sm text-ink/80 mt-3 leading-relaxed">
+                {entry.data.description}
+              </p>
+            )}
+
+            <!-- Deliverables & Core Responsibilities -->
+            <div class="mt-4 pt-3.5 border-t border-border/60 text-xs sm:text-sm text-muted [&>h2]:text-xs [&>h2]:font-mono [&>h2]:uppercase [&>h2]:tracking-wider [&>h2]:text-ink/80 [&>h2]:mb-2.5 [&>h2]:font-semibold [&>ul]:space-y-2 [&>ul]:list-none [&>ul>li]:relative [&>ul>li]:pl-4 [&>ul>li]:leading-relaxed [&>ul>li::before]:content-['•'] [&>ul>li::before]:absolute [&>ul>li::before]:left-0 [&>ul>li::before]:text-accent [&>ul>li::before]:font-bold [&>ul>li>strong]:text-ink [&>ul>li>strong]:font-medium">
+              <Content />
+            </div>
+
+            <!-- Skills & Technologies Wrapped Badges -->
+            {entry.data.skills && entry.data.skills.length > 0 && (
+              <div class="mt-4 pt-3 border-t border-border/40">
+                <div class="flex flex-wrap gap-1.5 sm:gap-2">
+                  {entry.data.skills.map((skill) => (
+                    <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-mono bg-canvas border border-border text-ink/80 break-words transition-colors">
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

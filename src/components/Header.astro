@@ -16,7 +16,7 @@ const translatePath = useTranslatedPath(lang);
 
 const homeUrl = translatePath('/');
 const isHomePage = Astro.url.pathname === '/' || Astro.url.pathname === '/vi' || Astro.url.pathname === '/vi/';
-const getSectionHref = (hash: string) => (isHomePage ? hash : `${homeUrl === '/' ? '' : homeUrl}${hash}`);
+const getSectionHref = (hash: string) => (isHomePage ? hash : `${homeUrl === '/' ? '/' : homeUrl}${hash}`);
 
 const navItems = [
   { href: getSectionHref('#projects'), label: t('nav.projects') },

@@ -26,8 +26,6 @@ outcome: "Prevented 100% of concurrent plan mutation collisions across 40+ daily
 reflection: "In physical operations software, optimistic concurrency is often insufficient for long-duration planning tasks; pessimistic distributed leases with clear visual ownership and automated heartbeats provide a vastly superior operator experience."
 ---
 
-# Site Leveling Management System (SLMS) Platform
-
 ## 1. Executive Summary & Operational Context
 
 The **Site Leveling Management System (SLMS)** is an enterprise construction operations platform engineered to coordinate end-to-end earthwork and land-grading projects. In commercial civil engineering, ground leveling is a high-capital phase characterized by severe logistical complexity:

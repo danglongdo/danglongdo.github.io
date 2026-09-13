@@ -27,11 +27,13 @@
   html {
     scroll-behavior: smooth;
     text-rendering: optimizeLegibility;
+    overflow-x: clip;
   }
 
   body {
     @apply bg-canvas text-ink font-sans antialiased;
     min-height: 100vh;
+    overflow-x: clip;
   }
 
   :focus-visible {

@@ -26,8 +26,6 @@ outcome: "Accelerated discussion thread load times by over 70% under simulated t
 reflection: "Realized the critical importance of cache invalidation strategy in microservices. Even when business requirements pivot—such as the company recruitment feature being shelved due to shifting organizational strategy—writing maintainable, modular Clean Architecture code ensures business logic remains clean, testable, and reusable."
 ---
 
-# Developer Community & Content Infrastructure (CodeLearn)
-
 ## Overview & Context
 
 CodeLearn (developed under FPT Information System - FIS) is one of Vietnam's leading programming education and developer competition platforms, serving a community of several hundred thousand registered engineers, university students, and coding enthusiasts. 
