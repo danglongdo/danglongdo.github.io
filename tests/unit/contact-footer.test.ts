@@ -43,7 +43,7 @@ describe('ContactBanner Component', () => {
 
     // GitHub link
     assert.ok(content.includes('siteConfig.links.github'), 'Links to candidate GitHub');
-    assert.equal(siteConfig.links.github, 'https://github.com/lombeo');
+    assert.equal(siteConfig.links.github, 'https://github.com/longd2k3');
 
     // LinkedIn link
     assert.ok(content.includes('siteConfig.links.linkedin'), 'Links to candidate LinkedIn');

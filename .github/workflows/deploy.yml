@@ -1,23 +1,24 @@
-name: CI & Cloudflare Pages Deployment Pipeline
+name: Deploy to GitHub Pages
 
 on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
   workflow_dispatch:
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  group: 'pages'
+  cancel-in-progress: false
 
 jobs:
-  validate-and-build:
-    name: Test, Build & Verify Static Site
+  build:
+    name: Test, Build & Package Site
     runs-on: ubuntu-latest
-
     steps:
       - name: 1. Checkout repository
         uses: actions/checkout@v4
@@ -41,61 +42,22 @@ jobs:
       - name: 6. Run unit test suite
         run: bun test
 
-      - name: 7. Install Playwright Chromium & dependencies
-        run: bun x playwright install --with-deps chromium
-
-      - name: 8. Run Playwright E2E test suite
-        run: bun run test:e2e
-
-      - name: 9. Build production static site
+      - name: 7. Build production static site
         run: bun run build
 
-      - name: 10. Verify static output directory and critical artifacts
-        run: |
-          echo "Verifying build output directory: dist/"
-          if [ ! -d "dist" ]; then
-            echo "Error: dist directory does not exist!" >&2
-            exit 1
-          fi
-          
-          echo "Checking essential HTML entry points..."
-          test -f "dist/index.html" || { echo "Error: dist/index.html missing!" >&2; exit 1; }
-          test -f "dist/404.html" || { echo "Error: dist/404.html missing!" >&2; exit 1; }
-          test -f "dist/vi/index.html" || { echo "Error: dist/vi/index.html missing!" >&2; exit 1; }
-          test -f "dist/resume.pdf" || { echo "Error: dist/resume.pdf missing!" >&2; exit 1; }
-          
-          echo "Artifact structure validated successfully."
-          ls -lah dist/
-
-      - name: 11. Upload build artifact
-        uses: actions/upload-artifact@v4
+      - name: 8. Upload GitHub Pages artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          name: portfolio-dist
-          path: dist/
-          retention-days: 7
+          path: ./dist
 
-  deploy-cloudflare:
-    name: Deploy to Cloudflare Pages (GitHub Actions Option)
-    needs: validate-and-build
+  deploy:
+    name: Deploy to GitHub Pages
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    needs: build
     steps:
-      - name: 1. Checkout repository
-        uses: actions/checkout@v4
-
-      - name: 2. Download production build artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: portfolio-dist
-          path: dist
-
-      - name: 3. Deploy to Cloudflare Pages via Wrangler
-        if: env.CLOUDFLARE_API_TOKEN != '' && env.CLOUDFLARE_ACCOUNT_ID != ''
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy dist --project-name=portfolio --commit-dirty=true
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

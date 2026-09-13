@@ -9,8 +9,8 @@ describe('siteConfig', () => {
     assert.equal(siteConfig.name, 'Đỗ Đăng Long');
   });
 
-  it('contains GitHub profile "https://github.com/lombeo"', () => {
-    assert.equal(siteConfig.links.github, 'https://github.com/lombeo');
+  it('contains valid GitHub profile', () => {
+    assert.equal(siteConfig.links.github, 'https://github.com/longd2k3');
   });
 
   it('contains LinkedIn profile link or placeholder', () => {

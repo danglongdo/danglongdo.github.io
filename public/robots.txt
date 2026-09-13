@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://longdd.dev/sitemap-index.xml
+Sitemap: https://danglongdo.github.io/sitemap-index.xml

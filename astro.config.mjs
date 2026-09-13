@@ -5,7 +5,7 @@ import sitemap from '@astrojs/sitemap';
 
 /** @type {import('astro').AstroUserConfig} */
 const config = {
-  site: 'https://longdd.dev',
+  site: 'https://danglongdo.github.io',
   output: 'static',
   integrations: [
     tailwind({
