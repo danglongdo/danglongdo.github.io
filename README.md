@@ -263,12 +263,15 @@ If an invalid build directory (such as `build/`) is specified in `wrangler.toml`
 
 To connect an affordable custom Vietnamese personal domain (such as `dandanglong.id.vn` or `dandanglong.name.vn`):
 
-1. **Register Domain**: Register at an accredited VNNIC registrar (TND, PA Vietnam, INET) for ~50,000–80,000 VND (or free for ages 18–23 under national digital youth incentives).
-2. **Add Domain to Cloudflare**: Add your domain to your free Cloudflare account and update nameservers at your registrar.
-3. **Link to Pages**:
+1. **Register Domain**: Register at an accredited VNNIC registrar (TND, PA Vietnam, INET, Mắt Bão) for ~30,000–60,000 VND (or free 0 VND for ages 18–23 under national digital youth incentives per Decision 826/QĐ-BTTTT and Circular 48/2025/TT-BKHCN).
+2. **Add Domain to Cloudflare**: Delegate nameservers to your free Cloudflare account for Anycast DNS, DDoS mitigation, and edge caching.
+3. **Link to Pages & Configure DNS**:
    - In Cloudflare Dashboard, navigate to **Workers & Pages** > `portfolio` > **Custom domains**.
-   - Click **Set up a custom domain** and enter your domain name (e.g., `dandanglong.id.vn`).
-   - Cloudflare automatically provisions a free Universal SSL/TLS certificate and manages DNS routing.
+   - Add both `dandanglong.id.vn` and `www.dandanglong.id.vn` (CNAME pointing to `<project>.pages.dev` with orange cloud proxied).
+   - Set SSL/TLS encryption to **Full (strict)** with **Always Use HTTPS** enabled.
+4. **Fallback Strategy**: Retain `<project>.pages.dev` (e.g. `longdd.pages.dev`) as a permanent zero-cost backup link.
+
+> 📖 **Comprehensive Step-by-Step Guide**: See [`docs/domain-setup-guide.md`](docs/domain-setup-guide.md) for the complete Vietnamese walkthrough including VNNIC regulations, pricing comparison tables, anti-promotional TLD renewal traps (`.xyz`/`.site`), eKYC steps, and troubleshooting.
 
 ---
 
