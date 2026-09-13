@@ -1,0 +1,89 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Footer from '../components/Footer.astro';
+import { useTranslations, useTranslatedPath } from '../i18n/utils';
+import { siteConfig } from '../config/site';
+
+const lang = 'en';
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+
+const homeUrl = translatePath('/');
+const projectsUrl = translatePath('/#projects');
+---
+
+<BaseLayout
+  title={`404: ${t('404.title')} | ${siteConfig.name}`}
+  description={t('404.description')}
+  lang={lang}
+>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 flex flex-col items-center justify-center min-h-[60vh] text-center">
+    <div class="relative w-full max-w-xl px-6 py-12 sm:px-12 sm:py-16 rounded-3xl border border-border dark:border-border-dark bg-surface dark:bg-surface-dark shadow-xs">
+      <!-- Status Badge -->
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-medium border border-border/80 dark:border-border-dark/80 bg-canvas dark:bg-canvas-dark text-muted dark:text-muted-dark mb-6">
+        <span class="w-2 h-2 rounded-full bg-accent animate-pulse" aria-hidden="true"></span>
+        <span>HTTP 404 // NOT FOUND</span>
+      </div>
+
+      <!-- Large Stylized 404 Display -->
+      <div class="text-7xl sm:text-8xl md:text-9xl font-mono font-extrabold tracking-tight text-ink/15 dark:text-ink-dark/20 select-none leading-none mb-2" aria-hidden="true">
+        404
+      </div>
+
+      <!-- Main Headline -->
+      <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-ink dark:text-ink-dark">
+        {t('404.title')}
+      </h1>
+
+      <!-- Description -->
+      <p class="text-sm sm:text-base text-muted dark:text-muted-dark max-w-md mx-auto mt-3 leading-relaxed">
+        {t('404.description')}
+      </p>
+
+      <!-- Action Navigation Buttons -->
+      <div class="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4">
+        <a
+          href={homeUrl}
+          class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-accent hover:bg-accent-hover text-white font-medium text-sm transition-all duration-150 shadow-xs hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-canvas"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            class="w-4 h-4"
+            aria-hidden="true"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M9.293 2.293a1 1 0 0 1 1.414 0l7 7A1 1 0 0 1 17 11h-1v6a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-6H3a1 1 0 0 1-.707-1.707l7-7Z"
+              clip-rule="evenodd"
+            />
+          </svg>
+          <span>{t('404.backHome')}</span>
+        </a>
+
+        <a
+          href={projectsUrl}
+          class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl border border-border dark:border-border-dark bg-surface dark:bg-surface-dark hover:bg-canvas dark:hover:bg-canvas-dark text-ink dark:text-ink-dark hover:border-accent/40 dark:hover:border-accent-dark/40 font-medium text-sm transition-all duration-150 shadow-xs hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-canvas"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            class="w-4 h-4 text-muted dark:text-muted-dark"
+            aria-hidden="true"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M4.25 2A2.25 2.25 0 0 0 2 4.25v2.5A2.25 2.25 0 0 0 4.25 9h2.5A2.25 2.25 0 0 0 9 6.75v-2.5A2.25 2.25 0 0 0 6.75 2h-2.5Zm0 9A2.25 2.25 0 0 0 2 13.25v2.5A2.25 2.25 0 0 0 4.25 18h2.5A2.25 2.25 0 0 0 9 15.75v-2.5A2.25 2.25 0 0 0 6.75 11h-2.5Zm9-9A2.25 2.25 0 0 0 11 4.25v2.5A2.25 2.25 0 0 0 13.25 9h2.5A2.25 2.25 0 0 0 18 6.75v-2.5A2.25 2.25 0 0 0 15.75 2h-2.5Zm0 9A2.25 2.25 0 0 0 11 13.25v2.5A2.25 2.25 0 0 0 13.25 18h2.5A2.25 2.25 0 0 0 18 15.75v-2.5A2.25 2.25 0 0 0 15.75 11h-2.5Z"
+              clip-rule="evenodd"
+            />
+          </svg>
+          <span>View Projects</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <Footer slot="footer" as="div" lang={lang} />
+</BaseLayout>
