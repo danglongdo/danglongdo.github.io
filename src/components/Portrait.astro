@@ -54,12 +54,25 @@ const localImages = import.meta.glob<{ default: ImageMetadata }>(
   { eager: true }
 );
 
-if (src) {
-  if (typeof src === 'object' && src !== null && 'src' in src) {
-    imageSource = src;
+// If src not provided, check standard portrait paths
+let targetSrc = src;
+if (!targetSrc) {
+  const cwd = process.cwd();
+  if (fs.existsSync(path.join(cwd, 'src/assets/portrait.png'))) {
+    targetSrc = '/src/assets/portrait.png';
+  } else if (fs.existsSync(path.join(cwd, 'public/images/portrait.png'))) {
+    targetSrc = '/images/portrait.png';
+  } else if (fs.existsSync(path.join(cwd, 'public/images/portrait.jpg'))) {
+    targetSrc = '/images/portrait.jpg';
+  }
+}
+
+if (targetSrc) {
+  if (typeof targetSrc === 'object' && targetSrc !== null && 'src' in targetSrc) {
+    imageSource = targetSrc;
     hasImage = true;
-  } else if (typeof src === 'string' && src.trim() !== '') {
-    const trimmed = src.trim();
+  } else if (typeof targetSrc === 'string' && targetSrc.trim() !== '') {
+    const trimmed = targetSrc.trim();
     const cwd = process.cwd();
 
     // Check possible on-disk paths
