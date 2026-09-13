@@ -1,21 +1,17 @@
 ---
-import '../styles/global.css';
+import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Đỗ Đăng Long | .NET Full-Stack & Enterprise AI Automation Engineer</title>
-  </head>
-  <body class="bg-canvas text-ink font-sans">
-    <main class="max-w-4xl mx-auto px-6 py-12">
-      <h1 class="text-3xl font-bold tracking-tight text-ink">Đỗ Đăng Long</h1>
-      <p class="text-muted mt-2 font-mono text-sm">.NET Full-Stack & Enterprise AI Automation Engineer</p>
-      <div class="mt-6 p-4 rounded border border-border bg-surface">
-        <span class="text-accent font-medium">Editorial Design Tokens Active</span>
-      </div>
-    </main>
-  </body>
-</html>
+<BaseLayout
+  title="Đỗ Đăng Long | .NET Full-Stack & Enterprise AI Automation Engineer"
+  description=".NET Full-Stack & Enterprise AI Automation Engineer Portfolio"
+  lang="en"
+>
+  <div class="max-w-4xl mx-auto px-6 py-12">
+    <h1 class="text-3xl font-bold tracking-tight text-ink">Đỗ Đăng Long</h1>
+    <p class="text-muted mt-2 font-mono text-sm">.NET Full-Stack & Enterprise AI Automation Engineer</p>
+    <div class="mt-6 p-4 rounded border border-border bg-surface">
+      <span class="text-accent font-medium">Editorial Design Tokens Active</span>
+    </div>
+  </div>
+</BaseLayout>

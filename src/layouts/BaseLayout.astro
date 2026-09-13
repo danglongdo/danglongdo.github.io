@@ -1,0 +1,49 @@
+---
+import '../styles/global.css';
+
+export interface Props {
+  title: string;
+  description?: string;
+  lang?: 'en' | 'vi';
+}
+
+const {
+  title,
+  description = 'Đỗ Đăng Long - .NET Full-Stack & Enterprise AI Automation Engineer',
+  lang = 'en',
+} = Astro.props;
+
+const skipLinkText = lang === 'vi' ? 'Chuyển đến nội dung chính' : 'Skip to content';
+---
+
+<!doctype html>
+<html lang={lang} class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    {description && <meta name="description" content={description} />}
+  </head>
+  <body class="bg-canvas text-ink font-sans flex flex-col min-h-screen antialiased selection:bg-accent selection:text-white">
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-surface focus:rounded-md focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-accent-hover focus:ring-offset-2 font-medium text-sm transition-all"
+    >
+      {skipLinkText}
+    </a>
+
+    <header>
+      <slot name="header" />
+    </header>
+
+    <main id="main-content" class="min-h-screen flex-1">
+      <slot />
+    </main>
+
+    <footer>
+      <slot name="footer" />
+    </footer>
+  </body>
+</html>
