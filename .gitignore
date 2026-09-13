@@ -21,3 +21,7 @@ Thumbs.db
 # Agent & Tooling metadata
 .codegraph
 .omo/
+
+# Test artifacts
+playwright-report/
+test-results/
