@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="100%" height="100%" fill="none" role="img" aria-label="Portrait placeholder for Đỗ Đăng Long">
+  <title>Portrait placeholder for Đỗ Đăng Long</title>
+  <desc>Sophisticated editorial monogram featuring initials DL for Đỗ Đăng Long</desc>
+  <defs>
+    <linearGradient id="slateBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1B1E22" />
+      <stop offset="50%" stop-color="#14171A" />
+      <stop offset="100%" stop-color="#0E1012" />
+    </linearGradient>
+    <linearGradient id="cobaltAccent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4E8CFF" />
+      <stop offset="100%" stop-color="#2457D6" />
+    </linearGradient>
+    <linearGradient id="borderGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2457D6" stop-opacity="0.9" />
+      <stop offset="40%" stop-color="#303840" stop-opacity="0.6" />
+      <stop offset="100%" stop-color="#2457D6" stop-opacity="0.4" />
+    </linearGradient>
+    <radialGradient id="ambientGlow" cx="70%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="#2457D6" stop-opacity="0.22" />
+      <stop offset="60%" stop-color="#2457D6" stop-opacity="0.04" />
+      <stop offset="100%" stop-color="#2457D6" stop-opacity="0" />
+    </radialGradient>
+    <pattern id="dotGrid" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1" fill="#FFFFFF" fill-opacity="0.05" />
+    </pattern>
+  </defs>
+
+  <!-- Background Base -->
+  <rect x="2" y="2" width="396" height="396" rx="44" fill="url(#slateBg)" />
+  
+  <!-- Subtle Dot Grid Matrix -->
+  <rect x="2" y="2" width="396" height="396" rx="44" fill="url(#dotGrid)" />
+
+  <!-- Ambient Cobalt Glow -->
+  <rect x="2" y="2" width="396" height="396" rx="44" fill="url(#ambientGlow)" />
+
+  <!-- Outer Editorial Border Ring -->
+  <rect x="2" y="2" width="396" height="396" rx="44" stroke="url(#borderGrad)" stroke-width="2" />
+
+  <!-- Inner Subtle Hairline Guide -->
+  <rect x="14" y="14" width="372" height="372" rx="34" stroke="#D9DDE1" stroke-opacity="0.08" stroke-width="1" />
+
+  <!-- Editorial Corner Marks -->
+  <path d="M 28 40 L 28 28 L 40 28" stroke="#2457D6" stroke-width="1.5" stroke-linecap="round" />
+  <path d="M 372 40 L 372 28 L 360 28" stroke="#2457D6" stroke-width="1.5" stroke-linecap="round" />
+  <path d="M 28 360 L 28 372 L 40 372" stroke="#2457D6" stroke-width="1.5" stroke-linecap="round" />
+  <path d="M 372 360 L 372 372 L 360 372" stroke="#2457D6" stroke-width="1.5" stroke-linecap="round" />
+
+  <!-- Architectural Header Meta -->
+  <g opacity="0.8">
+    <text x="200" y="76" text-anchor="middle" fill="#4E8CFF" font-family="'Geist Mono', 'JetBrains Mono', monospace" font-size="11" font-weight="600" letter-spacing="0.28em">PORTFOLIO // PROFILE</text>
+  </g>
+
+  <!-- Geometric Monogram "DL" -->
+  <g transform="translate(0, 0)">
+    <!-- Letter "D" in Crisp Architectural White -->
+    <path
+      d="M 116 142 H 168 C 196 142 214 160 214 198 C 214 236 196 254 168 254 H 116 Z M 138 164 V 232 H 166 C 182 232 192 222 192 198 C 192 174 182 164 166 164 Z"
+      fill="#F7F7F4"
+      fill-rule="evenodd"
+    />
+
+    <!-- Letter "L" in Duotone Cobalt Gradient -->
+    <path
+      d="M 226 142 H 248 V 232 H 286 V 254 H 226 Z"
+      fill="url(#cobaltAccent)"
+    />
+
+    <!-- Modernist Accent Dot -->
+    <circle cx="280" cy="150" r="5" fill="#4E8CFF" />
+  </g>
+
+  <!-- Editorial Footer Meta -->
+  <g opacity="0.75">
+    <text x="200" y="318" text-anchor="middle" fill="#D9DDE1" font-family="'Geist Sans', 'Inter', -apple-system, sans-serif" font-size="13" font-weight="600" letter-spacing="0.22em">ĐỖ ĐĂNG LONG</text>
+    <text x="200" y="338" text-anchor="middle" fill="#5C6570" font-family="'Geist Mono', 'JetBrains Mono', monospace" font-size="10" font-weight="500" letter-spacing="0.16em">SYS · ARCHITECT // SWE</text>
+  </g>
+</svg>
