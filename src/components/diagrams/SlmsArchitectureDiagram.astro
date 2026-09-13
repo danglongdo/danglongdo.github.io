@@ -1,0 +1,359 @@
+---
+import type { SupportedLanguage } from '../../i18n/ui';
+
+export interface Props {
+  locale?: SupportedLanguage;
+}
+
+const { locale = 'en' } = Astro.props;
+const isVi = locale === 'vi';
+---
+
+<div class="not-prose my-8 w-full rounded-2xl border border-border/80 dark:border-border-dark/80 bg-surface/90 dark:bg-surface-dark/90 p-5 sm:p-7 md:p-8 shadow-xs backdrop-blur-xs transition-colors">
+  <!-- Diagram Header -->
+  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-6 border-b border-border/70 dark:border-border-dark/70">
+    <div class="space-y-1">
+      <div class="flex items-center gap-2">
+        <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-mono font-medium bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 dark:border-emerald-500/30">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+          </span>
+          <span>{isVi ? 'Kiến trúc Phân tán & Khóa Đồng thời' : 'Distributed Monolith & Concurrency Engine'}</span>
+        </span>
+        <span class="text-xs font-mono text-muted dark:text-muted-dark">
+          ASP.NET Core 8 &bull; EF Core 7 &bull; Redis &bull; SignalR &bull; Vue 3
+        </span>
+      </div>
+      <h3 class="text-base sm:text-lg font-bold text-ink dark:text-ink-dark tracking-tight">
+        {isVi ? 'Sơ đồ Kiến trúc Hệ thống SLMS & Cơ chế Khóa Kế hoạch' : 'SLMS Platform Architecture & Plan Edit Lock Mesh'}
+      </h3>
+    </div>
+    <div class="flex items-center gap-2 self-start sm:self-auto text-xs font-mono text-muted dark:text-muted-dark">
+      <span class="px-2 py-1 rounded bg-canvas dark:bg-canvas-dark border border-border dark:border-border-dark">
+        {isVi ? 'Độ trễ: < 50ms P95' : 'Latency: < 50ms P95'}
+      </span>
+    </div>
+  </div>
+
+  <!-- Diagram Canvas -->
+  <div class="mt-8 space-y-6">
+    <!-- LAYER 1: CLIENT LAYER (VUE 3) -->
+    <div class="rounded-xl border border-border/70 dark:border-border-dark/70 bg-canvas/40 dark:bg-canvas-dark/40 p-4 sm:p-5">
+      <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+        <div class="flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-sm bg-emerald-500"></span>
+          <h4 class="text-xs sm:text-sm font-mono font-semibold uppercase tracking-wider text-ink dark:text-ink-dark">
+            {isVi ? 'Tầng Client / Ứng dụng Web Vue 3' : 'Client Layer / Vue 3 Operations Client App'}
+          </h4>
+        </div>
+        <span class="text-[11px] font-mono px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-500/20">
+          {isVi ? 'Giao tiếp Kép: REST + SignalR WebSockets' : 'Dual Transport: REST + SignalR WebSockets'}
+        </span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4">
+        <!-- Feature 1: Lock Banner -->
+        <div class="p-3.5 sm:p-4 rounded-xl border border-border dark:border-border-dark bg-surface dark:bg-surface-dark flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <span class="p-1.5 rounded-lg bg-amber-500/10 text-amber-600 dark:text-amber-400">
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
+                </svg>
+              </span>
+              <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-700 dark:text-amber-300">
+                UI State Guard
+              </span>
+            </div>
+            <h5 class="text-xs sm:text-sm font-semibold text-ink dark:text-ink-dark">
+              {isVi ? 'Banner Trạng thái Khóa Thời gian Thực' : 'Real-Time Lock Status Banner'}
+            </h5>
+            <p class="text-[11px] sm:text-xs text-muted dark:text-muted-dark mt-1 leading-relaxed">
+              {isVi ? 'Hiển thị danh tính kỹ sư đang chỉnh sửa, đếm ngược thời hạn và tự động khóa chế độ Chỉ Đọc cho các kỹ sư khác' : 'Displays active lease holder, countdown timer, and locks canvas to Read-Only mode for concurrent engineers'}
+            </p>
+          </div>
+          <div class="mt-3 pt-2 border-t border-border/60 dark:border-border-dark/60 text-[10px] font-mono text-muted dark:text-muted-dark">
+            Conflict Resolution Modal &bull; Read-Only Guard
+          </div>
+        </div>
+
+        <!-- Feature 2: Heartbeat Interceptor -->
+        <div class="p-3.5 sm:p-4 rounded-xl border border-border dark:border-border-dark bg-surface dark:bg-surface-dark flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <span class="p-1.5 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+                </svg>
+              </span>
+              <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-700 dark:text-emerald-300">
+                60s Interval
+              </span>
+            </div>
+            <h5 class="text-xs sm:text-sm font-semibold text-ink dark:text-ink-dark">
+              {isVi ? 'Bộ Đếm Nhịp Tim Tự Động (Heartbeat)' : 'Heartbeat Lease Interceptor (60s)'}
+            </h5>
+            <p class="text-[11px] sm:text-xs text-muted dark:text-muted-dark mt-1 leading-relaxed">
+              {isVi ? 'Tự động gửi tín hiệu xác thực gia hạn thời hạn khóa thêm 2 phút khi người dùng còn thao tác trên bản vẽ' : 'Background ping automatically renewing lease token expiry for active editors without disrupting calculations'}
+            </p>
+          </div>
+          <div class="mt-3 pt-2 border-t border-border/60 dark:border-border-dark/60 text-[10px] font-mono text-muted dark:text-muted-dark">
+            POST /api/plans/&#123;id&#125;/heartbeat &bull; Token Auth
+          </div>
+        </div>
+
+        <!-- Feature 3: SignalR Client -->
+        <div class="p-3.5 sm:p-4 rounded-xl border border-border dark:border-border-dark bg-surface dark:bg-surface-dark flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <span class="p-1.5 rounded-lg bg-accent/10 text-accent dark:text-accent-dark">
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M8.288 15.038a5.25 5.25 0 0 1 7.424 0M5.106 11.856c3.807-3.808 9.98-3.808 13.788 0M1.924 8.674c5.565-5.565 14.587-5.565 20.152 0M12.53 18.22l-.53.53-.53-.53a.75.75 0 0 1 1.06 0Z" />
+                </svg>
+              </span>
+              <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-accent/10 text-accent dark:bg-accent-dark/20 dark:text-accent-dark">
+                WSS Full-Duplex
+              </span>
+            </div>
+            <h5 class="text-xs sm:text-sm font-semibold text-ink dark:text-ink-dark">
+              {isVi ? 'Kênh WebSocket SignalR Lắng Nghe Sự Kiện' : 'SignalR WebSocket Real-Time Client'}
+            </h5>
+            <p class="text-[11px] sm:text-xs text-muted dark:text-muted-dark mt-1 leading-relaxed">
+              {isVi ? 'Nhận tức thời thông báo chiếm khóa, giải phóng hoặc thu hồi khóa khi hết hạn từ cụm máy chủ' : 'Subscribes to plan groups for sub-second lock acquisition, voluntary release, and forced expiry notifications'}
+            </p>
+          </div>
+          <div class="mt-3 pt-2 border-t border-border/60 dark:border-border-dark/60 text-[10px] font-mono text-muted dark:text-muted-dark">
+            PlanNotificationHub &bull; Group Subscriptions
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONNECTOR ARROW 1: CLIENT -> APPLICATION LAYER -->
+    <div class="flex flex-col items-center justify-center my-1 text-center">
+      <div class="h-4 w-px bg-accent/40 dark:bg-accent-dark/40"></div>
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-canvas dark:bg-canvas-dark border border-border dark:border-border-dark text-[11px] font-mono text-muted dark:text-muted-dark shadow-xs">
+        <svg class="w-3.5 h-3.5 text-accent dark:text-accent-dark animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5 12 21m0 0-7.5-7.5M12 21V3" />
+        </svg>
+        <span>
+          {isVi
+            ? 'HTTPS REST (Thao tác Kế hoạch) & WSS (Kênh Tín hiệu Thời gian Thực)'
+            : 'HTTPS REST (Plan Mutations & Locks) & WSS (Real-Time SignalR Broadcast)'}
+        </span>
+      </div>
+      <div class="h-4 w-px bg-accent/40 dark:bg-accent-dark/40"></div>
+    </div>
+
+    <!-- LAYER 2: APPLICATION CORE LAYER (ASP.NET CORE 8) -->
+    <div class="rounded-xl border border-border/80 dark:border-border-dark/80 bg-surface dark:bg-surface-dark p-4 sm:p-6 shadow-xs">
+      <div class="flex flex-wrap items-center justify-between gap-2 mb-4 pb-3 border-b border-border/70 dark:border-border-dark/70">
+        <div class="flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-sm bg-accent dark:bg-accent-dark"></span>
+          <h4 class="text-xs sm:text-sm font-mono font-semibold uppercase tracking-wider text-ink dark:text-ink-dark">
+            {isVi ? 'Tầng Ứng dụng / ASP.NET Core 8 Clean Architecture Monolith' : 'Application Layer / ASP.NET Core 8 Web API Clean Architecture Monolith'}
+          </h4>
+        </div>
+        <span class="text-[11px] font-mono px-2 py-0.5 rounded-full bg-canvas dark:bg-canvas-dark border border-border dark:border-border-dark text-muted dark:text-muted-dark">
+          ~340 Commits Ownership &bull; C# 12
+        </span>
+      </div>
+
+      <!-- Core Monolith Components Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <!-- Module 1: Controllers & Guards -->
+        <div class="p-3.5 rounded-lg border border-border/80 dark:border-border-dark/80 bg-canvas/40 dark:bg-canvas-dark/40">
+          <div class="flex items-center gap-1.5 text-accent dark:text-accent-dark mb-1">
+            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75" />
+            </svg>
+            <span class="text-xs font-mono font-semibold">{isVi ? 'API & Bảo Mật' : 'Controllers & Guards'}</span>
+          </div>
+          <p class="text-[11px] text-muted dark:text-muted-dark leading-relaxed">
+            {isVi ? 'REST Endpoints, xác thực JWT, Rate Limiting & Middleware xử lý ngoại lệ toàn cục' : 'RESTful controllers, JWT claims authentication, rate limiting & RFC 7807 problem details'}
+          </p>
+          <div class="mt-2 text-[10px] font-mono text-muted dark:text-muted-dark">Auth &bull; Audit Interceptors</div>
+        </div>
+
+        <!-- Module 2: Application Services -->
+        <div class="p-3.5 rounded-lg border border-border/80 dark:border-border-dark/80 bg-canvas/40 dark:bg-canvas-dark/40">
+          <div class="flex items-center gap-1.5 text-accent dark:text-accent-dark mb-1">
+            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 0 0 .75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 0 0-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0 1 12 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 0 1-.673-.38m0 0A2.18 2.18 0 0 1 3 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 0 1 3.413-.387m7.5 0V5.25A2.25 2.25 0 0 0 13.5 3h-3a2.25 2.25 0 0 0-2.25 2.25v.894m7.5 0a48.667 48.667 0 0 0-7.5 0M12 12.75h.008v.008H12v-.008Z" />
+            </svg>
+            <span class="text-xs font-mono font-semibold">{isVi ? 'Dịch Vụ Nghiệp Vụ' : 'Application Services'}</span>
+          </div>
+          <p class="text-[11px] text-muted dark:text-muted-dark leading-relaxed">
+            {isVi ? 'PlanService, MachineryAllocationService, DailyLogService, SurveyCheckpointService' : 'PlanService, MachineryAllocationService, DailyLogService & SurveyCheckpointService'}
+          </p>
+          <div class="mt-2 text-[10px] font-mono text-muted dark:text-muted-dark">CQRS Commands & Queries</div>
+        </div>
+
+        <!-- Module 3: Concurrency Engine (Key Innovation) -->
+        <div class="p-3.5 rounded-lg border border-amber-500/40 dark:border-amber-400/40 bg-amber-500/5 dark:bg-amber-400/5">
+          <div class="flex items-center gap-1.5 text-amber-600 dark:text-amber-400 mb-1">
+            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m0-10.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.75c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.57-.598-3.75h-.152c-3.196 0-6.1-1.25-8.25-3.286Zm0 13.036h.008v.008H12v-.008Z" />
+            </svg>
+            <span class="text-xs font-mono font-semibold">{isVi ? 'Động Cơ Khóa Đồng Thời' : 'Concurrency Engine'}</span>
+          </div>
+          <p class="text-[11px] text-muted dark:text-muted-dark leading-relaxed">
+            {isVi ? 'PlanEditLockManager (cấp/gia hạn/giải phóng khóa) & HostedService quét dọn ngầm mỗi 30s' : 'PlanEditLockManager (lease lease grant/release) & 30s BackgroundCleanupHostedService'}
+          </p>
+          <div class="mt-2 text-[10px] font-mono text-amber-700 dark:text-amber-300 font-semibold">
+            Pessimistic Lease Mesh
+          </div>
+        </div>
+
+        <!-- Module 4: Real-Time & Event Dispatch -->
+        <div class="p-3.5 rounded-lg border border-border/80 dark:border-border-dark/80 bg-canvas/40 dark:bg-canvas-dark/40">
+          <div class="flex items-center gap-1.5 text-accent dark:text-accent-dark mb-1">
+            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
+            </svg>
+            <span class="text-xs font-mono font-semibold">{isVi ? 'Điều Phối Sự Kiện' : 'Real-Time & Dispatch'}</span>
+          </div>
+          <p class="text-[11px] text-muted dark:text-muted-dark leading-relaxed">
+            {isVi ? 'SignalR Hubs phát tán trạng thái khóa thời gian thực & MailKit gửi cảnh báo sự cố hiện trường' : 'SignalR Hubs broadcasting state transitions & MailKit background email dispatchers'}
+          </p>
+          <div class="mt-2 text-[10px] font-mono text-muted dark:text-muted-dark">SignalR + MailKit Worker</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONNECTOR ARROW 2: MONOLITH -> STORAGE & CACHE -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-1">
+      <div class="flex flex-col items-center justify-center text-center">
+        <div class="h-3 w-px bg-accent/40 dark:bg-accent-dark/40"></div>
+        <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-canvas dark:bg-canvas-dark border border-border dark:border-border-dark text-[11px] font-mono text-muted dark:text-muted-dark shadow-xs">
+          <svg class="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5 12 21m0 0-7.5-7.5M12 21V3" />
+          </svg>
+          <span>{isVi ? 'EF Core 7 (Interceptors & Soft-Delete Filter)' : 'EF Core 7 (Interceptors & Soft-Delete Filter)'}</span>
+        </div>
+        <div class="h-3 w-px bg-accent/40 dark:bg-accent-dark/40"></div>
+      </div>
+
+      <div class="flex flex-col items-center justify-center text-center">
+        <div class="h-3 w-px bg-accent/40 dark:bg-accent-dark/40"></div>
+        <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-canvas dark:bg-canvas-dark border border-border dark:border-border-dark text-[11px] font-mono text-muted dark:text-muted-dark shadow-xs">
+          <svg class="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21 3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />
+          </svg>
+          <span>{isVi ? 'Redis Cache-Aside & Pub/Sub Backplane' : 'Redis Cache-Aside & Pub/Sub Backplane'}</span>
+        </div>
+        <div class="h-3 w-px bg-accent/40 dark:bg-accent-dark/40"></div>
+      </div>
+    </div>
+
+    <!-- LAYER 3: PERSISTENCE & MESSAGING LAYER -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <!-- PostgreSQL Database Box -->
+      <div class="rounded-xl border border-border/70 dark:border-border-dark/70 bg-canvas/40 dark:bg-canvas-dark/40 p-4 sm:p-5">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-sm bg-blue-600 dark:bg-blue-400"></span>
+            <h4 class="text-xs sm:text-sm font-mono font-semibold uppercase tracking-wider text-ink dark:text-ink-dark">
+              {isVi ? 'Cơ sở Dữ liệu Chính / PostgreSQL' : 'Primary Database / PostgreSQL Engine'}
+            </h4>
+          </div>
+          <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-500/10 text-blue-700 dark:text-blue-300">
+            ACID Relational
+          </span>
+        </div>
+
+        <ul class="space-y-2.5">
+          <li class="p-2.5 rounded-lg bg-surface dark:bg-surface-dark border border-border dark:border-border-dark">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-semibold text-ink dark:text-ink-dark">
+                {isVi ? 'Bảng Nghiệp vụ Cốt lõi' : 'Core Business Tables'}
+              </span>
+              <span class="text-[10px] font-mono text-muted dark:text-muted-dark">Relational Schema</span>
+            </div>
+            <p class="text-[11px] text-muted dark:text-muted-dark mt-0.5">
+              {isVi ? 'Plans, PlanEditLocks, LevelingZones, MachineryAssignments, DailyShiftLogs, SurveyCheckpoints' : 'Plans, PlanEditLocks, LevelingZones, MachineryAssignments, DailyShiftLogs, SurveyCheckpoints'}
+            </p>
+          </li>
+
+          <li class="p-2.5 rounded-lg bg-surface dark:bg-surface-dark border border-border dark:border-border-dark">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-semibold text-ink dark:text-ink-dark">
+                {isVi ? 'Bộ Lọc Xóa Mềm Toàn Cục (Global Query Filter)' : 'Global Soft-Delete Query Filter'}
+              </span>
+              <span class="text-[10px] font-mono text-muted dark:text-muted-dark">p => !p.IsDeleted</span>
+            </div>
+            <p class="text-[11px] text-muted dark:text-muted-dark mt-0.5">
+              {isVi ? 'Tự động ẩn bản ghi xóa mềm trên toàn bộ truy vấn LINQ, hỗ trợ hoàn tác khi cần thiết' : 'Automatically filters soft-deleted records across all LINQ queries; supports .IgnoreQueryFilters()'}
+            </p>
+          </li>
+
+          <li class="p-2.5 rounded-lg bg-surface dark:bg-surface-dark border border-border dark:border-border-dark">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-semibold text-ink dark:text-ink-dark">
+                {isVi ? 'Tự Động Ghi Dấu Vết Kiểm Toán (Audit Trail)' : 'Automatic Audit Trail Interceptor'}
+              </span>
+              <span class="text-[10px] font-mono text-muted dark:text-muted-dark">SaveChangesAsync</span>
+            </div>
+            <p class="text-[11px] text-muted dark:text-muted-dark mt-0.5">
+              {isVi ? 'Tự động gán CreatedAtUtc, UpdatedAtUtc và UserId cho toàn bộ thực thể kế thừa IAuditableEntity' : 'Automated tracking of CreatedAtUtc, UpdatedAtUtc, and UserId during SaveChangesAsync pipeline'}
+            </p>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Redis Distributed Cache & Pub/Sub Box -->
+      <div class="rounded-xl border border-border/70 dark:border-border-dark/70 bg-canvas/40 dark:bg-canvas-dark/40 p-4 sm:p-5">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-sm bg-emerald-500"></span>
+            <h4 class="text-xs sm:text-sm font-mono font-semibold uppercase tracking-wider text-ink dark:text-ink-dark">
+              {isVi ? 'Bộ Nhớ Đệm Phân Tán & Pub/Sub / Redis' : 'Distributed Cache & Pub/Sub Mesh / Redis'}
+            </h4>
+          </div>
+          <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-700 dark:text-emerald-300">
+            Sub-50ms Reads
+          </span>
+        </div>
+
+        <ul class="space-y-2.5">
+          <li class="p-2.5 rounded-lg bg-surface dark:bg-surface-dark border border-border dark:border-border-dark">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-semibold text-ink dark:text-ink-dark">
+                {isVi ? 'Đệm Dữ Liệu Truy Vấn Nóng (Cache-Aside)' : 'Query Result Cache-Aside Pattern'}
+              </span>
+              <span class="text-[10px] font-mono text-muted dark:text-muted-dark">TTL 5 Minutes</span>
+            </div>
+            <p class="text-[11px] text-muted dark:text-muted-dark mt-0.5">
+              {isVi ? 'Lưu trữ tóm tắt tiến độ phân khu, định mức đào đắp giúp giảm tải tính toán nặng trên PostgreSQL' : 'Caches high-frequency site progress summaries and machinery fuel logs to offload complex joins'}
+            </p>
+          </li>
+
+          <li class="p-2.5 rounded-lg bg-surface dark:bg-surface-dark border border-border dark:border-border-dark">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-semibold text-ink dark:text-ink-dark">
+                {isVi ? 'Đồng Bộ Hóa Đa Server (SignalR Backplane)' : 'SignalR Distributed Backplane'}
+              </span>
+              <span class="text-[10px] font-mono text-muted dark:text-muted-dark">Redis Pub/Sub</span>
+            </div>
+            <p class="text-[11px] text-muted dark:text-muted-dark mt-0.5">
+              {isVi ? 'Đồng bộ hóa các sự kiện khóa kế hoạch tức thì giữa nhiều node máy chủ API backend' : 'Synchronizes plan edit lock events across scale-out API replicas without lost messages'}
+            </p>
+          </li>
+
+          <li class="p-2.5 rounded-lg bg-surface dark:bg-surface-dark border border-border dark:border-border-dark">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-semibold text-ink dark:text-ink-dark">
+                {isVi ? 'Vô Hiệu Hóa Đệm Hướng Sự Kiện' : 'Targeted Event-Driven Invalidation'}
+              </span>
+              <span class="text-[10px] font-mono text-muted dark:text-muted-dark">Instant Eviction</span>
+            </div>
+            <p class="text-[11px] text-muted dark:text-muted-dark mt-0.5">
+              {isVi ? 'Tự động xóa đệm tương ứng ngay khi kỹ sư nộp nhật ký ca hoặc chốt mốc đo đạc mới' : 'Evicts stale cache entries immediately upon daily shift log submission or survey updates'}
+            </p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

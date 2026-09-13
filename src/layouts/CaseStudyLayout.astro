@@ -6,6 +6,9 @@ import Footer from '../components/Footer.astro';
 import siteConfig from '../config/site';
 import type { SupportedLanguage } from '../i18n/ui';
 import { useTranslations, useTranslatedPath } from '../i18n/utils';
+import NalArchitectureDiagram from '../components/diagrams/NalArchitectureDiagram.astro';
+import SlmsArchitectureDiagram from '../components/diagrams/SlmsArchitectureDiagram.astro';
+import CodelearnArchitectureDiagram from '../components/diagrams/CodelearnArchitectureDiagram.astro';
 
 export interface Props {
   project: CollectionEntry<'projects'>;
@@ -301,11 +304,34 @@ const takeaways = [
         </section>
       )}
 
+      <!-- System Architecture & Data Flow Section -->
+      <section aria-labelledby="architecture-diagram-heading" class="mb-14 sm:mb-16">
+        <div class="flex items-center gap-2 mb-4">
+          <span class="font-mono text-xs uppercase tracking-wider text-accent dark:text-accent-dark font-semibold">
+            02 / {t('project.architectureSection')}
+          </span>
+          <span class="h-px w-8 bg-border dark:bg-border-dark" aria-hidden="true" />
+        </div>
+
+        <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 mb-6">
+          <h2 id="architecture-diagram-heading" class="text-2xl sm:text-3xl font-bold tracking-tight text-ink dark:text-ink-dark">
+            {t('project.architectureSection')}
+          </h2>
+          <p class="text-xs sm:text-sm text-muted dark:text-muted-dark font-mono">
+            {t('project.architectureSubtitle')}
+          </p>
+        </div>
+
+        {data.slug === 'nal-ai-automation-erp' && <NalArchitectureDiagram locale={locale} />}
+        {data.slug === 'sep490-construction-slms' && <SlmsArchitectureDiagram locale={locale} />}
+        {data.slug === 'codelearn-community-content' && <CodelearnArchitectureDiagram locale={locale} />}
+      </section>
+
       <!-- Technical Deep-Dive Markdown Body -->
       <section aria-labelledby="case-study-body-heading" class="mb-16 sm:mb-20">
         <div class="flex items-center gap-2 mb-6">
           <span class="font-mono text-xs uppercase tracking-wider text-accent dark:text-accent-dark font-semibold">
-            02 / Technical Case Study
+            03 / {locale === 'vi' ? 'Nội dung Phân tích Kỹ thuật' : 'Technical Case Study'}
           </span>
           <span class="h-px w-8 bg-border dark:bg-border-dark" aria-hidden="true" />
         </div>

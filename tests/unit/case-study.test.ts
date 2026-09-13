@@ -87,4 +87,12 @@ describe('Case Study Template and Routes', () => {
     assert.match(layoutContent, /project\.outcome/);
     assert.match(layoutContent, /project\.reflection/);
   });
+
+  it('CaseStudyLayout integrates dedicated visual architecture diagram components', () => {
+    const layoutContent = readFileSync(layoutPath, 'utf-8');
+    assert.match(layoutContent, /NalArchitectureDiagram/);
+    assert.match(layoutContent, /SlmsArchitectureDiagram/);
+    assert.match(layoutContent, /CodelearnArchitectureDiagram/);
+    assert.match(layoutContent, /architecture-diagram-heading/);
+  });
 });

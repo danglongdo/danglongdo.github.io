@@ -48,39 +48,6 @@ As the **Backend Lead and Primary Author**, I owned the architectural foundation
 - **Concurrency & State Integrity**: Invented and implemented the **Plan Edit Lock** architecture, eliminating race conditions during critical planning phases.
 - **Full-Stack Collaboration**: While primary responsibilities were server-side, I crossed over to the **Vue 3** frontend client to build the planning lock user interface, real-time lock status indicators, lock renewal heartbeat timers, and conflict-resolution modal flows.
 
-```
-+-------------------------------------------------------------------------------+
-|                             SLMS System Architecture                          |
-+-------------------------------------------------------------------------------+
-|  Vue 3 Client App                                                             |
-|  - Real-Time Lock Status Banner  - Heartbeat Interceptor (60s)  - SignalR Hub  |
-+---------------------------------------+---------------------------------------+
-                                        | HTTPS / WSS
-                                        v
-+-------------------------------------------------------------------------------+
-|  ASP.NET Core 8 Web API (Clean Architecture Monolith)                         |
-|                                                                               |
-|  +-------------------------------------------------------------------------+  |
-|  | Controllers & Filters: Auth / JWT, Rate Limiting, Audit Interceptors    |  |
-|  +-------------------------------------------------------------------------+  |
-|  | Application Services: PlanService, MachineryService, DailyLogService    |  |
-|  +-------------------------------------------------------------------------+  |
-|  | Concurrency Engine: PlanEditLockManager, BackgroundCleanupHostedService |  |
-|  +-------------------------------------------------------------------------+  |
-|  | Real-Time & Event Dispatch: SignalR Hubs, MailKit Notification Worker   |  |
-|  +-------------------------------------------------------------------------+  |
-|  | Data Persistence: EF Core 7 Global Query Filters (Soft-Delete & Audit)  |  |
-+-----------------------------------+-------------------+-----------------------+
-                                    |                   |
-                        PostgreSQL  |                   | Redis Distributed Cache
-                                    v                   v & Pub/Sub Layer
-                    +--------------------+     +--------------------------------+
-                    | Primary Database   |     | Key-Value Cache (Daily Status) |
-                    | Tables: Plans,     |     | Pub/Sub: Plan Lock Events      |
-                    | Locks, Logs, Audit |     | SignalR Backplane Coordination |
-                    +--------------------+     +--------------------------------+
-```
-
 ---
 
 ## 3. Modular Architecture & Data Persistence Engine

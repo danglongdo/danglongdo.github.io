@@ -29,6 +29,10 @@ test.describe('Case Study Template Suite', () => {
     const takeaways = page.locator('#takeaways-heading');
     await expect(takeaways).toBeVisible();
 
+    const archHeading = page.locator('#architecture-diagram-heading');
+    await expect(archHeading).toBeVisible();
+    await expect(archHeading).toContainText('System Architecture & Data Flow');
+
     // Confidentiality Notice banner
     const ndaNotice = page.locator('aside[role="note"]');
     await expect(ndaNotice).toBeVisible();
@@ -58,6 +62,10 @@ test.describe('Case Study Template Suite', () => {
     const ndaNotice = page.locator('aside[role="note"]');
     await expect(ndaNotice).toBeVisible();
     await expect(ndaNotice).toContainText('thoả thuận bảo mật (NDA)');
+
+    const archHeading = page.locator('#architecture-diagram-heading');
+    await expect(archHeading).toBeVisible();
+    await expect(archHeading).toContainText('Kiến trúc Hệ thống & Luồng Dữ liệu');
   });
 
   test('QA failure scenario: request non-existent project slug returns 404', async ({ page }) => {

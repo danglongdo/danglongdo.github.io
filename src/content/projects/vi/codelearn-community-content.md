@@ -32,29 +32,6 @@ CodeLearn (nền tảng được phát triển và vận hành bởi Công ty TN
 
 Trong kỳ thực tập kỹ sư phần mềm kéo dài 10 tháng tại FIS (trụ sở số 10 Phạm Văn Bạch, Cầu Giấy, Hà Nội), tôi tham gia trực tiếp vào đội ngũ phát triển nền tảng phụ trách các tương tác cộng đồng, phân phối nội dung học tập và cổng thông tin việc làm. Nhiệm vụ trọng tâm là thiết kế kiến trúc và phát triển hoàn chỉnh từ đầu đến cuối (end-to-end) ba phân hệ cốt lõi, kết nối giao diện hiện đại Next.js với hệ thống dịch vụ backend microservices ASP.NET Core hiệu năng cao.
 
-```
-┌────────────────────────────────────────────────────────────────────────┐
-│                        Next.js Frontend Client                         │
-│           (SSR / ISR, Diễn đàn tương tác, Hệ thống Blog)               │
-└───────────────────────────────────┬────────────────────────────────────┘
-                                    │ HTTPS / REST
-                                    ▼
-┌────────────────────────────────────────────────────────────────────────┐
-│                   ASP.NET Core Web API Gateway                         │
-│                  Cấu trúc ứng dụng Clean Architecture                  │
-├───────────────────────┬────────────────────────┬───────────────────────┤
-│   Phân hệ Diễn đàn    │    Phân hệ Blog / Bài  │  Phân hệ Tuyển dụng   │
-│(Luồng hỏi đáp, lồng)  │ (Biên tập, xuất bản)   │  (Hồ sơ, việc làm)*   │
-└──────────┬────────────┴───────────┬────────────┴───────────┬───────────┘
-           │                        │                        │
-           ▼                        ▼                        ▼
-┌───────────────────────────────────────┐ ┌──────────────────────────────┐
-│        PostgreSQL Database            │ │  Redis Cache & Pub/Sub Mesh  │
-│(Lưu trữ dữ liệu quan hệ, chuẩn ACID)  │ │ (Đệm truy vấn, đồng bộ hóa)  │
-└───────────────────────────────────────┘ └──────────────────────────────┘
-* Ghi chú: Phân hệ Tuyển dụng đã hoàn thiện nhưng tạm hoãn do thay đổi định hướng sản phẩm.
-```
-
 ---
 
 ## Ba Phân hệ Cốt lõi Trực tiếp Phát triển Toàn diện
@@ -103,18 +80,25 @@ Nhằm hiện thực hóa định hướng kết nối lập trình viên xuất
 
 Do đặc thù các luồng thảo luận sôi nổi và bài viết blog có tỉ lệ đọc vượt trội so với tỉ lệ ghi (khoảng 95% thao tác đọc), hệ thống tối ưu hóa bằng Redis:
 
-```
-[Hành động người dùng: Sửa Bài viết/Bình luận]
-                      │
-                      ▼
-     [API Instance #1] ─── Ghi vào DB ───► [PostgreSQL]
-              │
-              ├───── Xóa Cache Cục bộ / Redis Key
-              │
-              ▼
-    [Redis Pub/Sub Channel] (Bản tin: "invalidate:post:123")
-       ├── Phát tán ──► [API Instance #2] (Xóa cache L1/in-memory)
-       └── Phát tán ──► [API Instance #3] (Xóa cache L1/in-memory)
+```csharp
+// Xử lý Vô hiệu hóa Đệm Đa phiên bản bằng Redis Pub/Sub
+public class InvalidatePostCacheHandler : INotificationHandler<PostUpdatedEvent>
+{
+    private readonly ISubscriber _redisSubscriber;
+    private readonly IDistributedCache _cache;
+
+    public async Task Handle(PostUpdatedEvent notification, CancellationToken cancellationToken)
+    {
+        // 1. Xóa khóa tương ứng khỏi bộ đệm phân tán cục bộ
+        await _cache.RemoveAsync($"post:{notification.PostId}", cancellationToken);
+
+        // 2. Phát tín hiệu thông báo xóa cache qua kênh Pub/Sub tới tất cả pod API khác
+        await _redisSubscriber.PublishAsync(
+            RedisChannel.Literal("cache:invalidation:posts"),
+            $"invalidate:post:{notification.PostId}"
+        );
+    }
+}
 ```
 
 - **Lưu trữ Đệm Danh sách Nóng**: Các API danh sách truy cập thường xuyên (như `/api/v1/blogs?page=1&tag=csharp` và `/api/v1/discussions/trending`) được lưu trữ trên Redis với thời gian sống (TTL) linh hoạt.

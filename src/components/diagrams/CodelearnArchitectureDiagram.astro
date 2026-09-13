@@ -1,0 +1,376 @@
+---
+import type { SupportedLanguage } from '../../i18n/ui';
+
+export interface Props {
+  locale?: SupportedLanguage;
+}
+
+const { locale = 'en' } = Astro.props;
+const isVi = locale === 'vi';
+---
+
+<div class="not-prose my-8 w-full rounded-2xl border border-border/80 dark:border-border-dark/80 bg-surface/90 dark:bg-surface-dark/90 p-5 sm:p-7 md:p-8 shadow-xs backdrop-blur-xs transition-colors">
+  <!-- Diagram Header -->
+  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-6 border-b border-border/70 dark:border-border-dark/70">
+    <div class="space-y-1">
+      <div class="flex items-center gap-2">
+        <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-mono font-medium bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20 dark:border-blue-500/30">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-500 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+          </span>
+          <span>{isVi ? 'Kiến trúc Phân hệ & Đệm Phân tán' : 'Microservice Modules & Distributed Invalidation'}</span>
+        </span>
+        <span class="text-xs font-mono text-muted dark:text-muted-dark">
+          Next.js ISR &bull; ASP.NET Core &bull; PostgreSQL &bull; Redis Pub/Sub
+        </span>
+      </div>
+      <h3 class="text-base sm:text-lg font-bold text-ink dark:text-ink-dark tracking-tight">
+        {isVi ? 'Sơ đồ Kiến trúc Nền tảng Cộng đồng CodeLearn' : 'CodeLearn Community & Content Engine Architecture'}
+      </h3>
+    </div>
+    <div class="flex items-center gap-2 self-start sm:self-auto text-xs font-mono text-muted dark:text-muted-dark">
+      <span class="px-2 py-1 rounded bg-canvas dark:bg-canvas-dark border border-border dark:border-border-dark">
+        {isVi ? 'Độ trễ: Giảm 70% Tải trang' : 'Throughput: 70%+ Faster Loads'}
+      </span>
+    </div>
+  </div>
+
+  <!-- Diagram Canvas -->
+  <div class="mt-8 space-y-6">
+    <!-- LAYER 1: CLIENT LAYER (NEXT.JS) -->
+    <div class="rounded-xl border border-border/70 dark:border-border-dark/70 bg-canvas/40 dark:bg-canvas-dark/40 p-4 sm:p-5">
+      <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+        <div class="flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-sm bg-blue-600 dark:bg-blue-400"></span>
+          <h4 class="text-xs sm:text-sm font-mono font-semibold uppercase tracking-wider text-ink dark:text-ink-dark">
+            {isVi ? 'Tầng Client / Ứng dụng Frontend Next.js' : 'Client Layer / Next.js Frontend Web Application'}
+          </h4>
+        </div>
+        <span class="text-[11px] font-mono px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-700 dark:text-blue-300 border border-blue-500/20">
+          {isVi ? 'Tải trang Nhanh với SSR & ISR' : 'SSR / ISR Hybrid Delivery'}
+        </span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4">
+        <!-- Feature 1: ISR / SSR Engine -->
+        <div class="p-3.5 sm:p-4 rounded-xl border border-border dark:border-border-dark bg-surface dark:bg-surface-dark flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <span class="p-1.5 rounded-lg bg-blue-500/10 text-blue-600 dark:text-blue-400">
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m3.75 13.5 10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75Z" />
+                </svg>
+              </span>
+              <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-blue-500/10 text-blue-700 dark:text-blue-300">
+                Next.js ISR
+              </span>
+            </div>
+            <h5 class="text-xs sm:text-sm font-semibold text-ink dark:text-ink-dark">
+              {isVi ? 'Tái tạo Tĩnh Tăng dần (ISR / SSR)' : 'SSR / ISR Page Generation'}
+            </h5>
+            <p class="text-[11px] sm:text-xs text-muted dark:text-muted-dark mt-1 leading-relaxed">
+              {isVi ? 'Phục vụ bài viết blog tĩnh với tốc độ phản hồi tức thì, tự động cập nhật bản dựng khi nội dung được biên tập' : 'Renders high-traffic editorial blogs statically with on-demand background cache purging upon updates'}
+            </p>
+          </div>
+          <div class="mt-3 pt-2 border-t border-border/60 dark:border-border-dark/60 text-[10px] font-mono text-muted dark:text-muted-dark">
+            Incremental Static Regeneration &bull; Edge Cache
+          </div>
+        </div>
+
+        <!-- Feature 2: Community Forums UI -->
+        <div class="p-3.5 sm:p-4 rounded-xl border border-border dark:border-border-dark bg-surface dark:bg-surface-dark flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <span class="p-1.5 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 0 1 .865-.502 49.188 49.188 0 0 0 3.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" />
+                </svg>
+              </span>
+              <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-700 dark:text-emerald-300">
+                Optimistic UI
+              </span>
+            </div>
+            <h5 class="text-xs sm:text-sm font-semibold text-ink dark:text-ink-dark">
+              {isVi ? 'Diễn đàn Hỏi đáp Lồng Nhiều Cấp' : 'Interactive Discussion Forums'}
+            </h5>
+            <p class="text-[11px] sm:text-xs text-muted dark:text-muted-dark mt-1 leading-relaxed">
+              {isVi ? 'Cây thảo luận phân nhánh đệ quy, bình chọn giải pháp tức thì với cơ chế cập nhật giao diện lạc quan' : 'Nested comment trees, instant upvote/downvote transitions, and rich code block rendering'}
+            </p>
+          </div>
+          <div class="mt-3 pt-2 border-t border-border/60 dark:border-border-dark/60 text-[10px] font-mono text-muted dark:text-muted-dark">
+            Hierarchical Threads &bull; LaTeX & Syntax Highlight
+          </div>
+        </div>
+
+        <!-- Feature 3: Editorial CMS & Recruitment -->
+        <div class="p-3.5 sm:p-4 rounded-xl border border-border dark:border-border-dark bg-surface dark:bg-surface-dark flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <span class="p-1.5 rounded-lg bg-violet-500/10 text-violet-600 dark:text-violet-400">
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                </svg>
+              </span>
+              <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-violet-500/10 text-violet-700 dark:text-violet-300">
+                Editorial Engine
+              </span>
+            </div>
+            <h5 class="text-xs sm:text-sm font-semibold text-ink dark:text-ink-dark">
+              {isVi ? 'Biên tập Bài viết & Hồ sơ Doanh nghiệp' : 'Editorial CMS & Company Showcase'}
+            </h5>
+            <p class="text-[11px] sm:text-xs text-muted dark:text-muted-dark mt-1 leading-relaxed">
+              {isVi ? 'Quy trình soạn thảo Markdown, sinh URL slug chuẩn SEO và quản lý hồ sơ đối tác tuyển dụng' : 'Markdown authoring pipeline, SEO canonical tags, slug resolution and partner showcase profile UI'}
+            </p>
+          </div>
+          <div class="mt-3 pt-2 border-t border-border/60 dark:border-border-dark/60 text-[10px] font-mono text-muted dark:text-muted-dark">
+            SEO Slugs &bull; DOMPurify Sanitization
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONNECTOR ARROW 1: CLIENT -> API LAYER -->
+    <div class="flex flex-col items-center justify-center my-1 text-center">
+      <div class="h-4 w-px bg-accent/40 dark:bg-accent-dark/40"></div>
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-canvas dark:bg-canvas-dark border border-border dark:border-border-dark text-[11px] font-mono text-muted dark:text-muted-dark shadow-xs">
+        <svg class="w-3.5 h-3.5 text-accent dark:text-accent-dark animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5 12 21m0 0-7.5-7.5M12 21V3" />
+        </svg>
+        <span>
+          {isVi
+            ? 'HTTPS REST API Gateway (OpenAPI / Swagger, JWT Guards & RFC 7807)'
+            : 'HTTPS REST API Gateway (OpenAPI / Swagger, JWT Guards & RFC 7807)'}
+        </span>
+      </div>
+      <div class="h-4 w-px bg-accent/40 dark:bg-accent-dark/40"></div>
+    </div>
+
+    <!-- LAYER 2: CORE API LAYER (ASP.NET CORE WEB API) -->
+    <div class="rounded-xl border border-border/80 dark:border-border-dark/80 bg-surface dark:bg-surface-dark p-4 sm:p-6 shadow-xs">
+      <div class="flex flex-wrap items-center justify-between gap-2 mb-4 pb-3 border-b border-border/70 dark:border-border-dark/70">
+        <div class="flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-sm bg-accent dark:bg-accent-dark"></span>
+          <h4 class="text-xs sm:text-sm font-mono font-semibold uppercase tracking-wider text-ink dark:text-ink-dark">
+            {isVi ? 'Tầng API Cốt lõi / ASP.NET Core Web API Gateway' : 'Core API Layer / ASP.NET Core Web API Gateway'}
+          </h4>
+        </div>
+        <span class="text-[11px] font-mono px-2 py-0.5 rounded-full bg-canvas dark:bg-canvas-dark border border-border dark:border-border-dark text-muted dark:text-muted-dark">
+          Clean Architecture &bull; 3 Modules End-to-End
+        </span>
+      </div>
+
+      <!-- 3 Core Modules Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4">
+        <!-- Module 1: Discussion Forum Engine -->
+        <div class="p-3.5 sm:p-4 rounded-xl border border-border/80 dark:border-border-dark/80 bg-canvas/40 dark:bg-canvas-dark/40 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <span class="p-1.5 rounded-lg bg-blue-500/10 text-blue-600 dark:text-blue-400">
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 9.75a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375m-13.5 3.01c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 0 1 .865-.502 49.188 49.188 0 0 0 3.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" />
+                </svg>
+              </span>
+              <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-blue-500/10 text-blue-700 dark:text-blue-300">
+                Q&A Module
+              </span>
+            </div>
+            <h5 class="text-xs sm:text-sm font-semibold text-ink dark:text-ink-dark">
+              {isVi ? 'Phân hệ Diễn đàn Thảo luận' : 'Discussion Forum Module'}
+            </h5>
+            <p class="text-[11px] sm:text-xs text-muted dark:text-muted-dark mt-1 leading-relaxed">
+              {isVi ? 'Luồng bình luận lồng nhiều cấp với truy vấn tối ưu, máy trạng thái chuyển đổi câu trả lời & kiểm soát giải pháp' : 'Hierarchical reply trees with path enumeration SQL optimization and atomic voting state machine'}
+            </p>
+          </div>
+          <div class="mt-3 pt-2 border-t border-border/60 dark:border-border-dark/60 text-[10px] font-mono text-muted dark:text-muted-dark">
+            Materialized Path &bull; State Machine
+          </div>
+        </div>
+
+        <!-- Module 2: Blog Publishing Engine -->
+        <div class="p-3.5 sm:p-4 rounded-xl border border-border/80 dark:border-border-dark/80 bg-canvas/40 dark:bg-canvas-dark/40 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <span class="p-1.5 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
+                </svg>
+              </span>
+              <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-700 dark:text-emerald-300">
+                Editorial Module
+              </span>
+            </div>
+            <h5 class="text-xs sm:text-sm font-semibold text-ink dark:text-ink-dark">
+              {isVi ? 'Phân hệ Blog & Biên tập Nội dung' : 'Blog Publishing Module'}
+            </h5>
+            <p class="text-[11px] sm:text-xs text-muted dark:text-muted-dark mt-1 leading-relaxed">
+              {isVi ? 'Vòng đời duyệt bài đa bước (Nháp -> Duyệt -> Xuất bản), thuật toán sinh slug URL tiếng Việt & phân loại gắn thẻ' : 'Draft-to-publish workflow lifecycle, collision-free Vietnamese slug generator & taxonomy tagging'}
+            </p>
+          </div>
+          <div class="mt-3 pt-2 border-t border-border/60 dark:border-border-dark/60 text-[10px] font-mono text-muted dark:text-muted-dark">
+            Workflow Engine &bull; Auto Slug Generator
+          </div>
+        </div>
+
+        <!-- Module 3: Company Recruitment CRUD -->
+        <div class="p-3.5 sm:p-4 rounded-xl border border-amber-500/30 dark:border-amber-400/30 bg-amber-500/5 dark:bg-amber-400/5 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <span class="p-1.5 rounded-lg bg-amber-500/10 text-amber-600 dark:text-amber-400">
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.75c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Z" />
+                </svg>
+              </span>
+              <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-700 dark:text-amber-300">
+                CRUD Showcase*
+              </span>
+            </div>
+            <h5 class="text-xs sm:text-sm font-semibold text-ink dark:text-ink-dark">
+              {isVi ? 'Phân hệ Tuyển dụng Doanh nghiệp' : 'Company Recruitment Module'}
+            </h5>
+            <p class="text-[11px] sm:text-xs text-muted dark:text-muted-dark mt-1 leading-relaxed">
+              {isVi ? 'Xây dựng hoàn chỉnh hồ sơ đối tác tuyển dụng gắn liền kỹ năng thuật toán (*tạm gác lại do thay đổi định hướng chiến lược)' : 'Full CRUD profiles & skill-linked role listings (*delivered and later shelved in product pivot)'}
+            </p>
+          </div>
+          <div class="mt-3 pt-2 border-t border-border/60 dark:border-border-dark/60 text-[10px] font-mono text-muted dark:text-muted-dark">
+            Decoupled Modular Architecture &bull; Clean CQRS
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONNECTOR ARROW 2: API -> PERSISTENCE & CACHE -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-1">
+      <div class="flex flex-col items-center justify-center text-center">
+        <div class="h-3 w-px bg-accent/40 dark:bg-accent-dark/40"></div>
+        <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-canvas dark:bg-canvas-dark border border-border dark:border-border-dark text-[11px] font-mono text-muted dark:text-muted-dark shadow-xs">
+          <svg class="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5 12 21m0 0-7.5-7.5M12 21V3" />
+          </svg>
+          <span>{isVi ? 'PostgreSQL (ACID Master Data)' : 'PostgreSQL (ACID Master Data)'}</span>
+        </div>
+        <div class="h-3 w-px bg-accent/40 dark:bg-accent-dark/40"></div>
+      </div>
+
+      <div class="flex flex-col items-center justify-center text-center">
+        <div class="h-3 w-px bg-accent/40 dark:bg-accent-dark/40"></div>
+        <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-canvas dark:bg-canvas-dark border border-border dark:border-border-dark text-[11px] font-mono text-muted dark:text-muted-dark shadow-xs">
+          <svg class="w-3.5 h-3.5 text-accent dark:text-accent-dark" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21 3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />
+          </svg>
+          <span>{isVi ? 'Redis Cache-Aside & Pub/Sub Invalidation' : 'Redis Cache-Aside & Pub/Sub Invalidation'}</span>
+        </div>
+        <div class="h-3 w-px bg-accent/40 dark:bg-accent-dark/40"></div>
+      </div>
+    </div>
+
+    <!-- LAYER 3: DATA & DISTRIBUTED CACHING LAYER -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <!-- PostgreSQL Database Box -->
+      <div class="rounded-xl border border-border/70 dark:border-border-dark/70 bg-canvas/40 dark:bg-canvas-dark/40 p-4 sm:p-5">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-sm bg-blue-600 dark:bg-blue-400"></span>
+            <h4 class="text-xs sm:text-sm font-mono font-semibold uppercase tracking-wider text-ink dark:text-ink-dark">
+              {isVi ? 'Cơ sở Dữ liệu / PostgreSQL Database' : 'Primary Database / PostgreSQL Storage'}
+            </h4>
+          </div>
+          <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-500/10 text-blue-700 dark:text-blue-300">
+            Relational Core
+          </span>
+        </div>
+
+        <ul class="space-y-2.5">
+          <li class="p-2.5 rounded-lg bg-surface dark:bg-surface-dark border border-border dark:border-border-dark">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-semibold text-ink dark:text-ink-dark">
+                {isVi ? 'Tối ưu Hóa Cây Bình Luận (Path Enumeration)' : 'Materialized Path Hierarchy'}
+              </span>
+              <span class="text-[10px] font-mono text-muted dark:text-muted-dark">-85% Query Cost</span>
+            </div>
+            <p class="text-[11px] text-muted dark:text-muted-dark mt-0.5">
+              {isVi ? 'Lưu trữ chuỗi đường dẫn phân cấp trong PostgreSQL giúp tải toàn bộ cây bình luận trong 1 truy vấn duy nhất' : 'Stores hierarchical path indices to retrieve full multi-tier comment trees in a single non-recursive query'}
+            </p>
+          </li>
+
+          <li class="p-2.5 rounded-lg bg-surface dark:bg-surface-dark border border-border dark:border-border-dark">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-semibold text-ink dark:text-ink-dark">
+                {isVi ? 'Bảng Dữ Liệu Bài Viết & Phân Loại' : 'Blog Posts & Multi-Tag Taxonomies'}
+              </span>
+              <span class="text-[10px] font-mono text-muted dark:text-muted-dark">Full-Text Search</span>
+            </div>
+            <p class="text-[11px] text-muted dark:text-muted-dark mt-0.5">
+              {isVi ? 'Lập chỉ mục tìm kiếm theo tác giả, ngôn ngữ lập trình và chuyên đề công nghệ' : 'Full-text indexing by author profiles, programming languages, and tutorial topic tags'}
+            </p>
+          </li>
+
+          <li class="p-2.5 rounded-lg bg-surface dark:bg-surface-dark border border-border dark:border-border-dark">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-semibold text-ink dark:text-ink-dark">
+                {isVi ? 'Lọc Dữ Liệu Độc Hại (DOMPurify)' : 'Sanitized Rich Text Storage'}
+              </span>
+              <span class="text-[10px] font-mono text-muted dark:text-muted-dark">XSS Protection</span>
+            </div>
+            <p class="text-[11px] text-muted dark:text-muted-dark mt-0.5">
+              {isVi ? 'Đường ống kiểm duyệt ngăn chặn hoàn toàn nguy cơ chèn mã độc vào bài đăng hoặc bình luận' : 'Strict server-side validation whitelist sanitizing user Markdown before saving to relational storage'}
+            </p>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Redis Cache & Pub/Sub Mesh Box -->
+      <div class="rounded-xl border border-border/70 dark:border-border-dark/70 bg-canvas/40 dark:bg-canvas-dark/40 p-4 sm:p-5">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-sm bg-accent dark:bg-accent-dark"></span>
+            <h4 class="text-xs sm:text-sm font-mono font-semibold uppercase tracking-wider text-ink dark:text-ink-dark">
+              {isVi ? 'Bộ Nhớ Đệm Phân Tán & Kênh Pub/Sub / Redis' : 'Distributed Cache & Pub/Sub Mesh / Redis'}
+            </h4>
+          </div>
+          <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-accent/10 text-accent dark:bg-accent-dark/20 dark:text-accent-dark">
+            Sub-Millisecond P99
+          </span>
+        </div>
+
+        <ul class="space-y-2.5">
+          <li class="p-2.5 rounded-lg bg-surface dark:bg-surface-dark border border-border dark:border-border-dark">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-semibold text-ink dark:text-ink-dark">
+                {isVi ? 'Đệm Danh Sách Truy Vấn Nóng (Query Cache)' : 'Hot Listing Cache-Aside Pattern'}
+              </span>
+              <span class="text-[10px] font-mono text-muted dark:text-muted-dark">Sliding TTL</span>
+            </div>
+            <p class="text-[11px] text-muted dark:text-muted-dark mt-0.5">
+              {isVi ? 'Đệm các luồng thảo luận thịnh hành và danh sách bài viết theo thẻ, giảm 70% tải cơ sở dữ liệu' : 'Caches trending threads and tag-filtered blog pages with sliding expiration windows'}
+            </p>
+          </li>
+
+          <li class="p-2.5 rounded-lg bg-surface dark:bg-surface-dark border border-border dark:border-border-dark">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-semibold text-ink dark:text-ink-dark">
+                {isVi ? 'Kênh Phát Tán Vô Hiệu Hóa Đệm (Pub/Sub)' : 'Multi-Instance Pub/Sub Invalidation'}
+              </span>
+              <span class="text-[10px] font-mono text-muted dark:text-muted-dark">invalidate:post:*</span>
+            </div>
+            <p class="text-[11px] text-muted dark:text-muted-dark mt-0.5">
+              {isVi ? 'Khi bài viết được sửa ở node API #1, kênh Pub/Sub phát tín hiệu xóa đệm trên tất cả node còn lại ngay lập tức' : 'When post updates on pod #1, Pub/Sub channel broadcasts eviction signals across all sibling API replicas'}
+            </p>
+          </li>
+
+          <li class="p-2.5 rounded-lg bg-surface dark:bg-surface-dark border border-border dark:border-border-dark">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-semibold text-ink dark:text-ink-dark">
+                {isVi ? 'Chống Hiệu Ứng Bầy Đàn (Stampede Guard)' : 'Cache Stampede Mutex Protection'}
+              </span>
+              <span class="text-[10px] font-mono text-muted dark:text-muted-dark">Distributed Locks</span>
+            </div>
+            <p class="text-[11px] text-muted dark:text-muted-dark mt-0.5">
+              {isVi ? 'Khóa phân tán kiểm soát các truy vấn tổng hợp phức tạp, ngăn nghẽn cơ sở dữ liệu khi khóa đệm hết hạn' : 'Distributed locks preventing thundering herd spikes on PostgreSQL during sudden traffic surges'}
+            </p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

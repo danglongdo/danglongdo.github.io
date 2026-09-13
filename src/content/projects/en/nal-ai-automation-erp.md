@@ -34,36 +34,6 @@ At **NAL Vietnam**, I spearheaded the architecture and development of an integra
 1. **A Centralized Internal ERP**: Built on the **Refine Framework**, **React**, and **TypeScript**, backed by **Supabase Edge Functions** and **PostgreSQL** with strict **Row-Level Security (RLS)**.
 2. **An Autonomous AI Agent Ecosystem**: Operating natively inside **Mattermost** via interactive webhooks, command integrations, and event listeners, delivering four dedicated conversational bots that execute operations autonomously with human-in-the-loop oversight.
 
-```
-+-------------------------------------------------------------------------+
-|                        Mattermost Chat Platform                         |
-|   +-------------------+  +------------------+  +--------------------+   |
-|   | Recruitment Bot   |  | Policy Q&A Bot   |  | Feedback Dispatch  |   |
-|   +-------------------+  +------------------+  +--------------------+   |
-|   | Multi-Person Automated Meeting Scheduler Bot                    |   |
-|   +-----------------------------------------------------------------+   |
-+------------------------------------+------------------------------------+
-                                     | Interactive Webhooks & Slash Events
-                                     v
-+-------------------------------------------------------------------------+
-|                Orchestration & Edge Functions Layer                     |
-|  - Signature & Security Verification                                    |
-|  - Event Ingestion & Idempotency Check                                  |
-|  - Agent State Machine & Intent Classifier                              |
-|  - LLM Pipeline (Structured Outputs / JSON Schema Enforcement)          |
-+------------------------------------+------------------------------------+
-                                     |
-                +--------------------+--------------------+
-                |                                         |
-                v                                         v
-+-------------------------------+       +---------------------------------+
-|     Supabase PostgreSQL DB    |       |   Refine / React Internal ERP   |
-|  - Row-Level Security (RLS)   |       |  - Administrative Backoffice    |
-|  - Audit Trails & Event Logs  |<======|  - Candidate & Policy CMS       |
-|  - Relational Master Data     |       |  - Action Approval Dashboard    |
-+-------------------------------+       +---------------------------------+
-```
-
 ---
 
 ## The Operational Challenge
@@ -96,37 +66,23 @@ To provide administrators, HR specialists, and managers with full visibility and
 
 Rather than creating a monolithic chatbot, we engineered four purpose-driven agents, each scoped to a well-defined operational domain with explicit inputs, deterministic state transitions, and structured outputs.
 
-```
-                              +--------------------+
-                              |  Inbound Webhook   |
-                              +---------+----------+
-                                        |
-                                        v
-                              +--------------------+
-                              |  HMAC Verification |
-                              +---------+----------+
-                                        |
-                                        v
-                              +--------------------+
-                              | Intent & Context   |
-                              | Parsing (JSON)     |
-                              +---------+----------+
-                                        |
-               +------------------------+------------------------+
-               |                        |                        |
-               v                        v                        v
-     [Recruitment Flow]          [Policy Flow]         [Scheduling Flow]
-     - Parse CV profile          - RAG Knowledge Base  - Free/Busy Matrix
-     - Draft rubric              - Extract references  - Slot ranking
-     - Notify Lead               - Cite chapters       - Calendar invite
-               |                        |                        |
-               +------------------------+------------------------+
-                                        |
-                                        v
-                              +--------------------+
-                              | Interactive Action |
-                              | Card in Mattermost |
-                              +--------------------+
+```typescript
+// Mattermost Inbound Webhook Payload & Agent Intent Routing Contract
+export interface MattermostWebhookEvent {
+  event_id: string;
+  timestamp: number;
+  channel_id: string;
+  user_id: string;
+  trigger_type: 'slash_command' | 'interactive_action' | 'dialog_submission';
+  agent_target: 'recruitment' | 'policy' | 'feedback' | 'scheduler';
+  payload: {
+    command?: string;
+    text?: string;
+    action_id?: string;
+    selected_option?: string;
+    context?: Record<string, unknown>;
+  };
+}
 ```
 
 ### 1. Recruitment Assistant Bot

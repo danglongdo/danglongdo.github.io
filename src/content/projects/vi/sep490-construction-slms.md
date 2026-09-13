@@ -48,39 +48,6 @@ Với vai trò **Kỹ sư Backend chính (Backend Lead & Primary Author)**, tôi
 - **Đảm bảo tính toàn vẹn trạng thái & Kiểm soát đồng thời**: Thiết kế và phát triển cơ chế **Plan Edit Lock**, giải quyết dứt điểm vấn đề tranh chấp dữ liệu trong quá trình lập kế hoạch.
 - **Phối hợp Full-Stack**: Bên cạnh nhiệm vụ chính ở backend, tôi trực tiếp tham gia phát triển phía client trên **Vue 3** để xây dựng giao diện hiển thị trạng thái khóa, bộ đếm nhịp tim (heartbeat timer) tự động gia hạn khóa và luồng modal thông báo giải quyết xung đột khi có người dùng khác đang chỉnh sửa.
 
-```
-+-------------------------------------------------------------------------------+
-|                            Kiến trúc Hệ thống SLMS                            |
-+-------------------------------------------------------------------------------+
-|  Ứng dụng Vue 3 Client                                                        |
-|  - Banner trạng thái khóa thời gian thực  - Heartbeat Interceptor  - SignalR  |
-+---------------------------------------+---------------------------------------+
-                                        | HTTPS / WSS
-                                        v
-+-------------------------------------------------------------------------------+
-|  ASP.NET Core 8 Web API (Clean Architecture Modular Monolith)                 |
-|                                                                               |
-|  +-------------------------------------------------------------------------+  |
-|  | Controllers & Filters: Xác thực JWT, Giới hạn tần suất, Audit Log       |  |
-|  +-------------------------------------------------------------------------+  |
-|  | Dịch vụ Nghiệp vụ: PlanService, MachineryService, DailyLogService       |  |
-|  +-------------------------------------------------------------------------+  |
-|  | Động cơ Kiểm soát Đồng thời: PlanEditLockManager, BackgroundHostedService|  |
-|  +-------------------------------------------------------------------------+  |
-|  | Điều phối Thời gian thực: SignalR Hubs, MailKit Worker gửi thông báo    |  |
-|  +-------------------------------------------------------------------------+  |
-|  | Tầng Lưu trữ: EF Core 7 Global Query Filters (Xóa mềm & Audit tự động)  |  |
-+-----------------------------------+-------------------+-----------------------+
-                                    |                   |
-                        PostgreSQL  |                   | Redis Distributed Cache
-                                    v                   v & Pub/Sub Layer
-                    +--------------------+     +--------------------------------+
-                    | Cơ sở dữ liệu chính|     | Key-Value Cache (Tiến độ ngày) |
-                    | Bảng: Kế hoạch,    |     | Pub/Sub: Sự kiện Lock Kế hoạch |
-                    | Khóa, Nhật ký, Log |     | SignalR Backplane Coordination |
-                    +--------------------+     +--------------------------------+
-```
-
 ---
 
 ## 3. Kiến trúc Modular Monolith & Tầng Lưu trữ Dữ liệu

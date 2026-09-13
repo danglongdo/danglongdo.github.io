@@ -32,29 +32,6 @@ CodeLearn (developed under FPT Information System - FIS) is one of Vietnam's lea
 
 During my 10-month software engineering internship at FIS (10 Phạm Văn Bạch, Cầu Giấy, Hanoi), I was embedded within the platform engineering squad responsible for community engagement, educational content distribution, and recruitment channels. My mandate was to architect and implement three end-to-end core modules bridging modern Next.js frontend interfaces with resilient ASP.NET Core microservices.
 
-```
-┌────────────────────────────────────────────────────────────────────────┐
-│                        Next.js Frontend Client                         │
-│       (SSR / ISR Pages, Interactive Forums, Editorial Blog)            │
-└───────────────────────────────────┬────────────────────────────────────┘
-                                    │ HTTPS / REST
-                                    ▼
-┌────────────────────────────────────────────────────────────────────────┐
-│                   ASP.NET Core Web API Gateway                         │
-│               Clean Architecture Core Application Engine               │
-├───────────────────────┬────────────────────────┬───────────────────────┤
-│   Discussion Module   │   Blog / Post Module   │  Recruitment Module   │
-│ (Threads, Nesting, Q&A)│ (Editorial, Publishing)│(Profiles, Showcase)*  │
-└──────────┬────────────┴───────────┬────────────┴───────────┬───────────┘
-           │                        │                        │
-           ▼                        ▼                        ▼
-┌───────────────────────────────────────┐ ┌──────────────────────────────┐
-│        PostgreSQL Database            │ │  Redis Cache & Pub/Sub Mesh  │
-│  (Relational persistence, ACID data)  │ │ (Query cache, sync channels) │
-└───────────────────────────────────────┘ └──────────────────────────────┘
-* Note: Recruitment module delivered and later shelved due to product direction.
-```
-
 ---
 
 ## Core Modules Built End-to-End
@@ -103,18 +80,25 @@ To ensure enterprise maintainability and high testability, the backend microserv
 
 Because discussion feeds and popular technical blogs experience high read-to-write ratios (roughly 95% reads), database query performance was optimized using Redis:
 
-```
-[User Action: Edit Blog/Comment]
-               │
-               ▼
-      [API Instance #1] ─── Writes DB ───► [PostgreSQL]
-               │
-               ├───── Invalidate Local / Redis Key
-               │
-               ▼
-     [Redis Pub/Sub Channel] (Message: "invalidate:post:123")
-        ├── Broadcast ──► [API Instance #2] (Evict in-memory / L1 cache)
-        └── Broadcast ──► [API Instance #3] (Evict in-memory / L1 cache)
+```csharp
+// Multi-Instance Cache Invalidation via Redis Pub/Sub
+public class InvalidatePostCacheHandler : INotificationHandler<PostUpdatedEvent>
+{
+    private readonly ISubscriber _redisSubscriber;
+    private readonly IDistributedCache _cache;
+
+    public async Task Handle(PostUpdatedEvent notification, CancellationToken cancellationToken)
+    {
+        // 1. Evict primary key from distributed cache
+        await _cache.RemoveAsync($"post:{notification.PostId}", cancellationToken);
+
+        // 2. Broadcast eviction channel message to sibling API replica instances
+        await _redisSubscriber.PublishAsync(
+            RedisChannel.Literal("cache:invalidation:posts"),
+            $"invalidate:post:{notification.PostId}"
+        );
+    }
+}
 ```
 
 - **Query Result Caching**: Hot listing endpoints (such as `/api/v1/blogs?page=1&tag=csharp` and `/api/v1/discussions/trending`) were cached in Redis with sliding time-to-live (TTL) windows.

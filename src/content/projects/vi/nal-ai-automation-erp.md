@@ -34,36 +34,6 @@ Tại **NAL Vietnam**, tôi đã trực tiếp đảm nhiệm vai trò kiến tr
 1. **Cổng ERP Quản trị Nội bộ Tập trung**: Xây dựng trên nền tảng **Refine Framework**, **React** và **TypeScript**, kết hợp với hạ tầng backend serverless **Supabase Edge Functions** cùng cơ sở dữ liệu **PostgreSQL** tích hợp chính sách bảo mật cấp hàng **Row-Level Security (RLS)** nghiêm ngặt.
 2. **Hệ sinh thái AI Agent Tự trị**: Tích hợp trực tiếp vào nền tảng giao tiếp **Mattermost** thông qua webhook tương tác, lệnh slash command và lắng nghe sự kiện, cung cấp 4 bot hội thoại chuyên biệt có khả năng tự động xử lý tác vụ dưới sự giám sát và phê duyệt của con người (human-in-the-loop).
 
-```
-+-------------------------------------------------------------------------+
-|                    Nền tảng Giao tiếp Mattermost                        |
-|   +-------------------+  +------------------+  +--------------------+   |
-|   | Bot Tuyển dụng    |  | Bot Quy chế/CS   |  | Bot Điều phối Góp ý|   |
-|   +-------------------+  +------------------+  +--------------------+   |
-|   | Bot Sắp xếp Lịch họp Tự động Đa thành viên                      |   |
-|   +-----------------------------------------------------------------+   |
-+------------------------------------+------------------------------------+
-                                     | Webhook Tương tác & Sự kiện Lệnh
-                                     v
-+-------------------------------------------------------------------------+
-|                  Tầng Điều phối & Supabase Edge Functions               |
-|  - Xác thực chữ ký số & Bảo mật Webhook                                 |
-|  - Thu nạp sự kiện & Khử trùng lặp (Idempotency)                        |
-|  - Máy trạng thái Agent (State Machine) & Phân loại Ý định              |
-|  - Xử lý LLM (Kiểm soát đầu ra có cấu trúc / JSON Schema Enforcement)   |
-+------------------------------------+------------------------------------+
-                                     |
-                +--------------------+--------------------+
-                |                                         |
-                v                                         v
-+-------------------------------+       +---------------------------------+
-|     Supabase PostgreSQL DB    |       |     Cổng ERP Refine / React     |
-|  - Row-Level Security (RLS)   |       |  - Quản trị viên & Vận hành     |
-|  - Nhật ký Kiểm toán (Audit)  |<======|  - Quản lý Ứng viên & Quy chế   |
-|  - Dữ liệu Quan hệ Master     |       |  - Dashboard Phê duyệt Hành động|
-+-------------------------------+       +---------------------------------+
-```
-
 ---
 
 ## Thách thức Vận hành Thực tế
@@ -96,37 +66,23 @@ Nhằm cung cấp cho các nhà quản lý và chuyên viên nhân sự cái nh�
 
 Thay vì xây dựng một chatbot tổng hợp cồng kềnh, chúng tôi thiết kế 4 agent chuyên biệt, mỗi bot phụ trách một miền nghiệp vụ rõ ràng với đầu vào cụ thể, máy trạng thái xác định và định dạng đầu ra chuẩn hoá.
 
-```
-                              +--------------------+
-                              |  Inbound Webhook   |
-                              +---------+----------+
-                                        |
-                                        v
-                              +--------------------+
-                              | Xác thực HMAC      |
-                              +---------+----------+
-                                        |
-                                        v
-                              +--------------------+
-                              | Phân tích Ý định   |
-                              | & Context (JSON)   |
-                              +---------+----------+
-                                        |
-               +------------------------+------------------------+
-               |                        |                        |
-               v                        v                        v
-     [Luồng Tuyển dụng]         [Luồng Quy chế]          [Luồng Lịch họp]
-     - Trích xuất CV            - RAG Cơ sở Tri thức     - Ma trận Lịch trống
-     - Sinh bộ câu hỏi          - Trích xuất điều khoản  - Đề xuất khung giờ
-     - Thông báo Lead           - Dẫn nguồn văn bản      - Tạo thư mời họp
-               |                        |                        |
-               +------------------------+------------------------+
-                                        |
-                                        v
-                              +--------------------+
-                              | Thẻ Hành động      |
-                              | trên Mattermost    |
-                              +--------------------+
+```typescript
+// Định dạng Payload Webhook Mattermost & Hợp đồng Định tuyến Ý định Agent
+export interface MattermostWebhookEvent {
+  event_id: string;
+  timestamp: number;
+  channel_id: string;
+  user_id: string;
+  trigger_type: 'slash_command' | 'interactive_action' | 'dialog_submission';
+  agent_target: 'recruitment' | 'policy' | 'feedback' | 'scheduler';
+  payload: {
+    command?: string;
+    text?: string;
+    action_id?: string;
+    selected_option?: string;
+    context?: Record<string, unknown>;
+  };
+}
 ```
 
 ### 1. Bot Trợ lý Tuyển dụng (Recruitment Assistant Bot)
