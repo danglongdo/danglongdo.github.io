@@ -17,6 +17,7 @@ node_modules/
 # OS & Editor files
 .DS_Store
 Thumbs.db
+*.log
 
 # Agent & Tooling metadata
 .codegraph
