@@ -36,16 +36,19 @@ jobs:
       - name: 4. Install dependencies
         run: bun install --frozen-lockfile
 
-      - name: 5. TypeScript type checking
+      - name: 5. Generate Astro types and content layer
+        run: bun x astro sync
+
+      - name: 6. TypeScript type checking
         run: bun x tsc --noEmit
 
-      - name: 6. Run unit test suite
+      - name: 7. Run unit test suite
         run: bun test
 
-      - name: 7. Build production static site
+      - name: 8. Build production static site
         run: bun run build
 
-      - name: 8. Upload GitHub Pages artifact
+      - name: 9. Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./dist
